@@ -292,6 +292,38 @@ As example: "*do you really need so much 'magic' to perform these tasks?*"
 Just give it a try ;-)
 
 
+HTML VS console
+===============
+
+*wru* core functionality is exactly the same in both environments ... it cannot be easier to maintain, imo.
+However, there are few substantial differences between HTML results and those shown in the console
+
+
+HTML tests
+----------
+
+  * based on classes, easily to customize via [CSS](https://github.com/WebReflection/wru/blob/master/test/wru.css)
+  * differential colors accordingly with test results: green if successful, red if failed, black if cryptical (e.g. unmanaged exceptions)
+  * failures or errors are not shown by default, **one click** to see the list of problems in any of those non green tests
+  * summary on top, no need to scroll 'till the end of the document to understand how it was. A nice summary with all passed, failed, or unmanaged errors test is shown on top
+
+
+console tests
+-------------
+
+  * based on `stdout`
+  * differential prefixes accordingly with test results: [OK] if successful, [FAILURE] if failed, [ERROR] if cryptical (e.g. unmanaged exceptions)
+  * failures and errors are always listed in the output
+  * summary at the end of the test, as shown in next example
+
+
+    ------------------------------
+    [ERROR]   1 Errors
+    [FAILURE] 1 Failures
+    [OK]      4 Passes
+    ------------------------------
+
+
 wrap it if you want
 ===================
 
