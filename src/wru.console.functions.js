@@ -57,9 +57,9 @@
     
     function writeItOrdered(fail) {
         for (var
-            i = 0, length = fail.length;
+            i = 0, length = fail[LENGTH];
             i < length;
-            log("    " + (++i) + ". " + fail[i])
+            log("    " + (++i) + ". " + fail[i - 1])
         );
     }
     

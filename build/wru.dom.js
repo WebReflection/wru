@@ -159,6 +159,9 @@
                 
                 // store the result in the right collection
                 push.call(result ? pass : fail, prefix + description);
+                
+                // just to add a bit of sugar
+                return result;
             },
             async: function async(description, callback, timeout, p) {
                 

@@ -85,9 +85,9 @@
     
     function writeItOrdered(fail) {
         for (var
-            i = 0, length = fail.length;
+            i = 0, length = fail[LENGTH];
             i < length;
-            log("    " + (++i) + ". " + fail[i])
+            log("    " + (++i) + ". " + fail[i - 1])
         );
     }
     
@@ -149,6 +149,9 @@
                 
                 // store the result in the right collection
                 push.call(result ? pass : fail, prefix + description);
+                
+                // just to add a bit of sugar
+                return result;
             },
             async: function async(description, callback, timeout, p) {
                 
