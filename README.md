@@ -281,6 +281,7 @@ As example: "*do you really need so much 'magic' to perform these tasks?*"
     // current enironment layout (HTML/Shell)
     wru.assert("oh come on but this is so easy!", 1);
 
+Just give it a try and fee free to trash it if you don't like to have your tests 100% under control ;-)
 
 license
 =======
