@@ -71,10 +71,13 @@
     }
     
     function Dary() {
+        overallPass += pass[LENGTH];
+        overallFail += fail[LENGTH];
+        overallFatal += fatal[LENGTH];
         passTheInfo("(" + join.call([
-            overallPass += pass[LENGTH],
-            overallFail += ci = fail[LENGTH],
-            overallFatal += fatal[LENGTH]
+            pass[LENGTH],
+            fail[LENGTH],
+            fatal[LENGTH]
         ], ", ") + ")");
         node = node.parentNode;
         fatal.length ?
