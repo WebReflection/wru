@@ -327,6 +327,48 @@ Arguments automations? Returned values? Expected number of calls per callback?
 The *wru* cross environment core is easy to hack for anybody, check [wru.js](https://github.com/WebReflection/wru/blob/master/src/wru.js) and your are already half way through ;-)
 
 
+I need a setup per each test!
+=============================
+
+Sure you do :-)
+
+    // just create a simple wrapper before your tests
+    // to fully automate the procedure
+    wru.test = (function (test) {
+        
+        // we got a closure here, do whaveter you want!
+        function whateverSetupIsNeeded(tmp) {
+            // do setup stuff
+        }
+        
+        return function (testObjects) {
+            // be sure it's an array, convert otherwise
+            testObjects = [].conca(testObjects);
+            
+            // per each object
+            for (var
+                // reassign the setup if present
+                reassign = function (setup) {
+                    testObjects[i].setup = function (tmp) {
+                        whateverSetupIsNeeded(tmp);
+                        setup && setup(tmp);
+                    };
+                },
+                i = testObjects.length; i--;
+                reassign(testObjects[i].setup)
+            );
+            
+            // invoke wru.test() which is self bound
+            test(list);
+            
+            // that's pretty much it
+        };
+        
+    }(wru.test));
+
+Similar technique if you need same teardown call per each test.
+
+
 license
 =======
 
