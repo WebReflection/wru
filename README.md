@@ -325,3 +325,11 @@ license
     LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
     THE SOFTWARE.
+
+
+OT: some fun during wru development
+-----------------------------------
+
+If you check the built source you will realize that a `wru.test()` lifecycle is between a call to internal `isGonnaBeLegen()` function, passing through the `waitForIt` variable if some asynchronous call has been required, and ending up into the `Dary()` callback.
+
+I know you don't care but at least now you know how is the `wru.test()` lifecycle :{D
