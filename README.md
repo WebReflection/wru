@@ -105,7 +105,7 @@ properties
 how does wru work
 -----------------
 
-Every test is performed synchronously unless there is no `wru.async()` call. In latter case all tests after the current will be waiting for the asynchronous call to be executed.
+Every test is performed synchronously unless there is one or more `wru.async()` calls. In latter case all tests after the current will be waiting for the asynchronous call to be executed.
 When it happens, if the asynchronous call performed one or more assertions, the framework keep going without requiring any extra step: is that easy!
 
     // inside a test object ...
