@@ -1,7 +1,7 @@
 wru :: unit tests have ever been that easy
 ==========================================
 
-wru is an essential unit test framework compatible with web environment, [node.js](http://nodejs.org/) and [Rhino](http://www.mozilla.org/rhino/) as well.
+*wru* is an **essential unit test framework** compatible with **web** environment, [node.js](http://nodejs.org/) and [Rhino](http://www.mozilla.org/rhino/) as well.
 
 
 features
