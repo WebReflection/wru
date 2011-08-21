@@ -20,7 +20,6 @@ If you can't believe it check [html](https://github.com/WebReflection/wru/blob/m
 wru basics
 ----------
 
-    ```JavaScript
     // probably all you need in a "one shot" test
     wru.test({
         name: "Hello wru!",
@@ -47,4 +46,3 @@ wru basics
             // do other stuf here
         }
     }]);
-    ```
