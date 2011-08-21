@@ -14,3 +14,34 @@ features
   * **cursor included in both web and console** ... you gonna realize how much "[THE CURSOR](http://www.3site.eu/cursor/)" is important, specially to understand if your test is **stuck** or simply "*waiting for*" ... cursor is working in both Unix and OSX consoles
   * **tiny**, even if it's not important in Unit Tests world, *wru* fits into about 2Kb (1.2Kb *minzpped*) which means not much to fix or change here, just a simple and reliable framework for your tests
   * **under your control**, since there is absolutely *no magic* behind *wru* code. You assert what you want, you async what you need, you describe what's needed, and you are *ready to go* in less than 5 minutes
+
+
+wru basics
+----------
+
+    // probably all you need in a "one shot" test
+    wru.test({
+        name: "Hello wru!",
+        test: function () {
+            wru.assert("it works!", 1);
+        }
+    });
+    
+    // for multiple tests ... pass an Array
+    wru.test([{
+        name: "test #1",
+        setup: function () {
+            // setup before the test
+        },
+        test: function () {
+            // do stuf here
+        },
+        teardown: function () {
+            // clean up after the test
+        }
+    },{
+        name: "test #2",
+        test: function () {
+            // do other stuf here
+        }
+    }]);
