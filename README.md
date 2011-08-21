@@ -59,7 +59,10 @@ wru basics
             // setup before the test
         },
         test: function () {
-            // do stuf here
+            // async test example
+            setTimeout(wru.async(function () {
+                wru.assert("executed", true);
+            }), 1000);
         },
         teardown: function () {
             // clean up after the test
@@ -83,7 +86,7 @@ There are truly few things you need to know, and even less properties you need t
 methods
 -------
 
-  * `test(object)` or `test(arrayOfObjects)` to execute a test. A generic test object may have one or more properties:
+  * `test(object)` or `test([object, ..., object])` to execute one or more tests. A generic test object may have one or more properties:
       * `test` property, as **function**, to execute the test with one or more `wru.assert()` or `wru.async()` calls
       * `name` or `description` property, as **string**, to have visual knowledge of the current test **optional**
       * `setup` property, as **function**, that will be executed right before the test: **optional**
