@@ -244,13 +244,9 @@ wru against others
 ==================
 
 Other UT frameworks may offer more than what *wru* does but this rarely comes for free.
-
 Some of them may have such complicated/articulated logic that it may happens is the UT framework itself that's failing rather than your code.
-
 Also you need to read a lot of documentation and most likely to obtain something already possible with *wru*
-
 I am not saying *wru* is the best UT framework out there, I am just saying you should consider your requirements before you chose an UT framework ;-)
-
 In any case, *wru* aim is to make any sort of test simplified and under control.
 
 As example: "*do you really need some magic to perform these tasks?*"
