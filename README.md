@@ -91,7 +91,7 @@ methods
       * `name` or `description` property, as **string**, to have visual knowledge of the current test **optional**
       * `setup` property, as **function**, that will be executed right before the test: **optional**
       * `teardown` property, as **function**, that will be executed right after the test: **optopnal**
-  * `assert("description", truishOrFalsyValue)` to manually assert whatever you want where **description is optional** (but suggested) and the assertion is compatible with *truish* or *falsy* values. You are in charge of strictly compare results if necessary by *===* operator, nothing new to learn here
+  * `assert("description", truishOrFalsyValue)` to manually assert whatever you want where **description is optional** (but suggested) and the assertion is compatible with *truish* or *falsy* values. You are in charge of strictly compared results if necessary by *===* operator, nothing new to learn here
   * `async("description", callback, timeout)` to tell *wru* that a test will be executed at some point later and where **both description and timeout are optionals**
 
 
@@ -148,8 +148,8 @@ Every test **may** have one or more `wru.assert()` calls inside. The method itse
 
 asynchronous tests and wru.async()
 ----------------------------------
-Every test is performed synchronously unless there is one or more `wru.async()` calls. In latter case all tests after the current will be waiting for the asynchronous call to be executed.
-When it happens, if the asynchronous call performed one or more assertions, the framework keep going without requiring any extra step: is that easy!
+Every test is performed synchronously unless there is one or more `wru.async()` calls. In latter case all tests after the current one will be waiting for the asynchronous call to be executed.
+When it happens, if the asynchronous call performed one or more assertions, the framework keep going without requiring any extra step: **is that easy!**
 
     // the test object ...
     {
@@ -189,12 +189,14 @@ In above example, the `onreadystatechange` function may be executed many times o
 If this does not happen the internal `TIMEOUT` constant, by default 10 seconds, will kill the procedure.
 You have to admit there is no reason to create an asynchronous test without performing some assertion inside the callback ... and this is where *wru* is smart.
 If many assertions have been defined and one of them is not reached is most likely because there was an error or a failure in the test.
-*wru* tracks all tests without problems so forget things such `lib.expectedAssertions(3)` and *friends* ... you really may not need that!
+*wru* tracks all tests without problems so forget things such `lib.expectedAssertions(3)` and "*friends*" ... you really may not need that!
 
 
 the build process
 =================
-*wru* is based on [javascript-builder](http://code.google.com/p/javascript-builder/) which is able to aggregate distributed files in order to produce the final library/framework even if split in more files.
+
+*wru* is based on [javascript-builder](http://code.google.com/p/javascript-builder/) which is able to aggregate distributed files in order to produce the final library/framework even if the source/JS logic is split in more files.
+
 This is the *wru* case, where some file is dedicated for web environment rather than console/shell one.
 If you fork the project and you make some change/improvement, first of all let me know :-), secondly remember to re-build the script.
 This is the list of files actually created by *wru build process* inside the *build* folder:
