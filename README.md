@@ -317,13 +317,6 @@ console tests
   * summary at the end of the test, as shown in next example
 
 
-    ------------------------------
-    [ERROR]   1 Errors
-    [FAILURE] 1 Failures
-    [OK]      4 Passes
-    ------------------------------
-
-
 wrap it if you want
 ===================
 
