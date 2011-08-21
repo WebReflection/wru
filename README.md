@@ -240,6 +240,52 @@ This is the list of files actually created by *wru build process* inside the *bu
 `wru.debug()` is automatically removed from built versions so that no evaluation of internals can be possible.
 
 
+wru against others
+==================
+
+Other UT frameworks may offer more than what *wru* does but this rarely comes for free.
+
+Some of them may have such complicated/articulated logic that it may happens is the UT framework itself that's failing rather than your code.
+
+Also you need to read a lot of documentation and most likely to obtain something already possible with *wru*
+
+I am not saying *wru* is the best UT framework out there, I am just saying you should consider your requirements before you chose an UT framework ;-)
+
+In any case, *wru* aim is to make any sort of test simplified and under control.
+
+As example: "*do you really need some magic to perform these tasks?*"
+
+    // rather than specify expected arguments
+    // via magic/complicated operations
+    function (a, b, c) {
+        wru.assert("received numbers",
+            typeof a == "number"
+            &&
+            typeof b == "number"
+            &&
+            typeof c == "number"
+        );
+    }
+    
+    // rather than specify returned values
+    // via magic/complicated operations
+    wru.assert(typeof callbac() != "undefined");
+    
+    // did you know the console object
+    // may have already an assert() method
+    // since that's basically all you need?
+    wru.assert(
+        "if true, I can get rid of wru since all I need is 'assert'",
+        "assert" in console
+    );
+    
+    // the only reason wru may be handy is the
+    // cross platform/environment compatibility
+    // and its async method interlaced with
+    // current enironment layout (HTML/Shell)
+    wru.assert("oh come on but this is so easy!", 1);
+
+
 license
 =======
 
