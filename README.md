@@ -249,7 +249,7 @@ Also you need to read a lot of documentation and most likely to obtain something
 I am not saying *wru* is the best UT framework out there, I am just saying you should consider your requirements before you chose an UT framework ;-)
 In any case, *wru* aim is to make any sort of test simplified and under control.
 
-As example: "*do you really need some magic to perform these tasks?*"
+As example: "*do you really need so much 'magic' to perform these tasks?*"
 
     // rather than specify expected arguments
     // via magic/complicated operations
