@@ -18,10 +18,6 @@ features
 
 If you can't believe it check [html](https://github.com/WebReflection/wru/blob/master/test/test.html), [node.js](https://github.com/WebReflection/wru/blob/master/test/testnode.js), or [Rhino](https://github.com/WebReflection/wru/blob/master/test/testrhino.js) test and see how *wru* does work ;-)
 
-Please remember all you have to do to build *wru* is this call in the *wru* project root
-
-    python builder/build.py
-
 
 compatibility
 -------------
@@ -254,6 +250,10 @@ This is the list of files actually created by *wru build process* inside the *bu
 If you want to have an overall view of the framework check already built output since if not familiar with this build process it may be hard at the beginning.
 
 This is the [HTML version](https://github.com/WebReflection/wru/blob/master/build/wru.dom.js), and this is the [console one](https://github.com/WebReflection/wru/blob/master/build/wru.console.max.js), you will notice things make sense there since the order is specified in the [build.py](https://github.com/WebReflection/wru/blob/master/builder/build.py) file.
+
+Please remember all you have to do to build *wru* is this call in the *wru* project root
+
+    python builder/build.py
 
 
 wru against others
