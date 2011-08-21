@@ -91,7 +91,7 @@ methods
       * `name` or `description` property, as **string**, to have visual knowledge of the current test **optional**
       * `setup` property, as **function**, that will be executed right before the test: **optional**
       * `teardown` property, as **function**, that will be executed right after the test: **optopnal**
-  * `assert("description", truishOrFalsyValue)` to manually assert whatever you want where **description is optional** (but suggested)
+  * `assert("description", truishOrFalsyValue)` to manually assert whatever you want where **description is optional** (but suggested) and the assertion is compatible with *truish* or *falsy* values. You are in charge of strictly compare results if necessary by *===* operator, nothing new to learn here
   * `async("description", callback, timeout)` to tell *wru* that a test will be executed at some point later and where **both description and timeout are optionals**
 
 
