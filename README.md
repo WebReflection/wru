@@ -18,6 +18,10 @@ features
 
 If you can't believe it check [html](https://github.com/WebReflection/wru/blob/master/test/test.html), [node.js](https://github.com/WebReflection/wru/blob/master/test/testnode.js), or [Rhino](https://github.com/WebReflection/wru/blob/master/test/testrhino.js) test and see how *wru* does work ;-)
 
+Please remember all you have to do to build *wru* is this call in the *wru* project root
+
+    python builder/build.py
+
 
 compatibility
 -------------
