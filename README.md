@@ -247,6 +247,10 @@ This is the list of files actually created by *wru build process* inside the *bu
 `wru.debug()` is a method used to export, track, test, or change internals. You should never use this method unless strictly necessary but it's there for debugging purpose.
 `wru.debug()` is automatically removed from built versions so that no evaluation of internals can be possible.
 
+If you want to have an overall view of the framework check already built output since if not familiar with this build process it may be hard at the beginning.
+
+This is the [HTML version](https://github.com/WebReflection/wru/blob/master/build/wru.dom.js), and this is the [console one](https://github.com/WebReflection/wru/blob/master/build/wru.console.max.js), you will notice things make sense there since the order is specified in the [build.py](https://github.com/WebReflection/wru/blob/master/builder/build.py) file.
+
 
 wru against others
 ==================
@@ -317,16 +321,6 @@ console tests
   * summary always at the end of the test
 
 
-
-wrap it if you want
-===================
-
-If you think *wru* is too simple, you still have a chance to improve it wrapping its basic methods and create something wonderful out of it.
-Arguments automations? Returned values? Expected number of calls per callback?
-
-The *wru* cross environment core is easy to hack for anybody, check [wru.js](https://github.com/WebReflection/wru/blob/master/src/wru.js) and your are already half way through ;-)
-
-
 I need a setup per each test!
 =============================
 
@@ -367,6 +361,15 @@ Sure you do :-)
     }(wru.test));
 
 Similar technique if you need same teardown call per each test.
+
+
+wrap it if you want
+===================
+
+If you think *wru* is too simple, you still have a chance to improve it wrapping its basic methods and create something wonderful out of it.
+Arguments automations? Returned values? Expected number of calls per callback?
+
+The *wru* cross environment core is easy to hack for anybody, check [wru.js](https://github.com/WebReflection/wru/blob/master/src/wru.js) and your are already half way through ;-)
 
 
 license
