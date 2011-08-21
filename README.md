@@ -33,7 +33,7 @@ From *wru* root directory, simply run these commands accordingly with what you w
     // web (through Mac OSX)
     open test/test.html
 
-If you forked the project, you made some change, and you want to **recompile wru**, this is all you have to do:
+If you forked the project, you made some change, and you want to **rebuild wru**, this is all you have to do:
 
     // still inside wru folder
     python builder/build.py
