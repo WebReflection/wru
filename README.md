@@ -108,12 +108,50 @@ how does wru work
 following a list of explained tasks that are possible with *wru*
 
 
-asynchronous test
------------------
+synchronous tests and wru.assert()
+----------------------------------
+Every test **may** have one or more `wru.assert()` calls inside. The method itself accepts one or two arguments. Following a sequence of valid operations.
+
+    // the test object ...
+    {
+        name: "existance test",
+        test: function () {
+            
+            // example only: if next property is not
+            // null, undefined, 0, false, "", or NaN
+            // the assertion will pass the test
+            wru.assert("callback exists", window.onload);
+            
+            // if necessary, assertion can be strict without problems
+            wru.assert(
+                "it is a callback",
+                typeof window.onload === "function"
+            );
+            
+            // the description is visually useful
+            // if the test fails but it's not mandatory
+            // next example is still valid, no description
+            wru.assert("isArray" in Array);
+            
+            // if a condition supposes to be truish
+            // wru.assert can make test life easier
+            // returning the asserted value
+            if (wru.assert("defineProperty" in Object)) {
+                wru.assert(
+                    Object.defineProperty({}, "_", {value: true})._
+                );
+            }
+            
+        }
+    }
+
+
+asynchronous tests and wru.async()
+----------------------------------
 Every test is performed synchronously unless there is one or more `wru.async()` calls. In latter case all tests after the current will be waiting for the asynchronous call to be executed.
 When it happens, if the asynchronous call performed one or more assertions, the framework keep going without requiring any extra step: is that easy!
 
-    // inside a test object ...
+    // the test object ...
     {
         name: "load content",
         test: function () {
