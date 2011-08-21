@@ -190,3 +190,19 @@ If this does not happen the internal `TIMEOUT` constant, by default 10 seconds, 
 You have to admit there is no reason to create an asynchronous test without performing some assertion inside the callback ... and this is where *wru* is smart.
 If many assertions have been defined and one of them is not reached is most likely because there was an error or a failure in the test.
 *wru* tracks all tests without problems so forget things such `lib.expectedAssertions(3)` and *friends* ... you really may not need that!
+
+
+the build process
+=================
+*wru* is based on [javascript-builder](http://code.google.com/p/javascript-builder/) which is able to aggregate distributed files in order to produce the final library/framework even if split in more files.
+This is the *wru* case, where some file is dedicated for web environment rather than console/shell one.
+If you fork the project and you make some change/improvement, first of all let me know :-), secondly remember to re-build the script.
+This is the list of files actually created by *wru build process* inside the *build* folder:
+
+  * **wru.console.max.js** is the full script console/shell related, suitable for *node.js* or *rhino* tests
+  * **wru.console.js** is the minified version of the precedent one with `wru.debug()` stripped out
+  * **wru.dom.js* is the full script DOM related, suitable for *web* and *browsers*
+  * **wru.min.js** is the minified version of the precedent one with `wru.debug()` stripped out
+
+`wru.debug()` is a method used to export, track, test, or change internals. You should never use this method unless strictly necessary but it's there for debugging purpose.
+`wru.debug()` is automatically removed from built versions so that no evaluation of internals can be possible.
