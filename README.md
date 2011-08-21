@@ -19,6 +19,12 @@ features
 If you can't believe it check [html](https://github.com/WebReflection/wru/blob/master/test/test.html), [node.js](https://github.com/WebReflection/wru/blob/master/test/testnode.js), or [Rhino](https://github.com/WebReflection/wru/blob/master/test/testrhino.js) test and see how *wru* does work ;-)
 
 
+compatibility
+-------------
+
+*wru* is compatible with basically all possible browsers out there included IE5.5, IE6, IE7, IE8, IE9, IE10, Chrome, Firefox, Safari, Webkit based, and Opera.
+
+
 how to test wru
 ---------------
 
