@@ -231,7 +231,7 @@ This is the list of files actually created by *wru build process* inside the *bu
 
   * **wru.console.max.js** is the full script console/shell related, suitable for *node.js* or *rhino* tests
   * **wru.console.js** is the minified version of the precedent one with `wru.debug()` stripped out
-  * **wru.dom.js* is the full script DOM related, suitable for *web* and *browsers*
+  * **wru.dom.js** is the full script DOM related, suitable for *web* and *browsers*
   * **wru.min.js** is the minified version of the precedent one with `wru.debug()` stripped out
 
 `wru.debug()` is a method used to export, track, test, or change internals. You should never use this method unless strictly necessary but it's there for debugging purpose.
