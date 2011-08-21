@@ -13,7 +13,7 @@ features
   * **easy**, probably the easiest way to test JS code out there thanks to its simplified API: `test`, `assert`, and `async` ... you already remember "*all of them*", isn't it?
   * **unobtrusive**, everything that could possibly change in such dynamic environment as JS is, is "*sandboxed*" inside the *wru closure*. This means no matter how "*nasty*" your code is, *wru* won't pollute or change the global environment, neither it will rely in native *constructor.prototypes* changes (`Array.prototype.push = ...` ? not a problem!)
   * **cursor included in both web and console** ... you gonna realize how much "[THE CURSOR](http://www.3site.eu/cursor/)" is important, specially to understand if your test is **stuck** or simply "*waiting for*" ... cursor is working in both Unix and OSX consoles
-  * **tiny**, even if it's not important in Unit Tests world, *wru* fits into about 2Kb (1.2Kb *minzpped*) which means not much to fix or change here, just a simple and reliable framework for your tests
+  * **tiny**, even if it's not important in Unit Tests world, *wru* fits into about 2Kb (1.2Kb *minzpped*) which means not much to fix or change here, just a simple, reliable, and essential framework for your tests
   * **under your control**, since there is absolutely *no magic* behind *wru* code. You assert what you want, you async what you need, you describe what's needed, and you are *ready to go* in less than 5 minutes
 
 If you can't believe it check [html](https://github.com/WebReflection/wru/blob/master/test/test.html), [node.js](https://github.com/WebReflection/wru/blob/master/test/testnode.js), or [Rhino](https://github.com/WebReflection/wru/blob/master/test/testrhino.js) test and see how *wru* does work ;-)
@@ -103,8 +103,13 @@ properties
 
 
 how does wru work
------------------
+=================
 
+following a list of explained tasks that are possible with *wru*
+
+
+asynchronous test
+-----------------
 Every test is performed synchronously unless there is one or more `wru.async()` calls. In latter case all tests after the current will be waiting for the asynchronous call to be executed.
 When it happens, if the asynchronous call performed one or more assertions, the framework keep going without requiring any extra step: is that easy!
 
@@ -122,7 +127,17 @@ When it happens, if the asynchronous call performed one or more assertions, the 
             xhr.open("get", "file.txt", true);
             xhr.onreadystatechange = wru.async(function () {
                 if (this.readyState === 4) {
+                    
+                    // only on readyState 4 there is an assertion
                     wru.assert("text is not empty", this.responseText.length);
+                    
+                    // if necessary, async call can be nested
+                    setTimeout(wru.async(function () {
+                        wru.assert(
+                            "DOM changed in the meanwhile",
+                            docment.body.innerHTML != storedLayout
+                        );
+                    }, 500));
                 }
             });
             xhr.send(null);
