@@ -19,6 +19,28 @@ features
 If you can't believe it check [html](https://github.com/WebReflection/wru/blob/master/test/test.html), [node.js](https://github.com/WebReflection/wru/blob/master/test/testnode.js), or [Rhino](https://github.com/WebReflection/wru/blob/master/test/testrhino.js) test and see how *wru* does work ;-)
 
 
+how to test wru
+---------------
+
+From *wru* root directory, simply run these commands accordingly with what you want to test:
+
+    // node.js test
+    node test/testnode.js
+    
+    // Rhino
+    java -jar builder/jar/js.jar test/testrhino.js
+    
+    // web (through Mac OSX)
+    open test/test.html
+
+If you forked the project, you made some change, and you want to **recompile wru**, this is all you have to do:
+
+    // still inside wru folder
+    python builder/build.py
+
+After the build process is finished, no more than 3 seconds, you should be able to run again the test for your own environment.
+
+
 wru basics
 ----------
 
@@ -49,27 +71,7 @@ wru basics
         }
     }]);
 
-
-test wru
---------
-
-From *wru* root directory, simply run these commands accordingly with what you want to test:
-
-    // node.js test
-    node test/testnode.js
-    
-    // Rhino
-    java -jar builder/jar/js.jar test/testrhino.js
-    
-    // web, through Mac OSX
-    open test/test.html
-
-If you forked the project, you made some change, and you want to **recompile wru**, this is all you have to do:
-
-    // still inside wru folder
-    python builder/build.py
-
-After the build process is finished, no more than 3 seconds, you should be able to run again the test for your own environment.
+To know more about *wru* possibilities ... please keep reading ;-)
 
 
 wru API
