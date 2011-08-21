@@ -314,7 +314,8 @@ console tests
   * based on `stdout`
   * differential prefixes accordingly with test results: `[OK]` if successful, `[FAILURE]` if failed, `[ERROR]` if cryptical (e.g. unmanaged exceptions)
   * failures and errors are always listed in the output
-  * summary at the end of the test, as shown in next example
+  * summary always at the end of the test
+
 
 
 wrap it if you want
