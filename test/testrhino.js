@@ -9,7 +9,7 @@
         
         load(
             new java.io.File(".").getCanonicalPath() + 
-            "/build/wru.console.max.js"
+            "/build/wru.console.js"
         );
         
         wru.test([{

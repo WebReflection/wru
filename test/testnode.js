@@ -1,5 +1,5 @@
         // node.js specific test
-        var wru = require("./../build/wru.console.max").wru;
+        var wru = require("./../build/wru.console").wru;
         wru.test([{
             name: "test that should pass",
             test: function () {

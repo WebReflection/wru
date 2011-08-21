@@ -26,7 +26,12 @@
     }
     
     function create(nodeName) {
-        return createElement.call(document, nodeName);
+        try {
+            return createElement.call(document, nodeName);
+        } catch($) {
+            // unfortuantely IE < 7 does not support host objects via call
+            return document.createElement(nodeName);
+        }
     }
     
     function putItThereAndGimmeBack(node, nodeName) {

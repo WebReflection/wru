@@ -54,7 +54,12 @@
     }
     
     function create(nodeName) {
-        return createElement.call(document, nodeName);
+        try {
+            return createElement.call(document, nodeName);
+        } catch($) {
+            // unfortuantely IE < 7 does not support host objects via call
+            return document.createElement(nodeName);
+        }
     }
     
     function putItThereAndGimmeBack(node, nodeName) {
@@ -313,6 +318,7 @@
         // these variables are used on DOM version only
         cursor = "\\|/-",
         document = window.document,
+        // unfortuantely IE < 7 does not support host objects via call
         createElement = document.createElement,
         
         
