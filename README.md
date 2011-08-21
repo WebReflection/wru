@@ -192,6 +192,34 @@ If many assertions have been defined and one of them is not reached is most like
 *wru* tracks all tests without problems so forget things such `lib.expectedAssertions(3)` and "*friends*" ... you really may not need that!
 
 
+the temporary object
+--------------------
+
+If needed, every `setup`, `test`, or `teardown` function will receive a "*freshly new backed*" object for the current test.
+This can be handy to store some reference or value on `setup`, use them during the `test`, and drop them during the `teardown` if necessary.
+
+    // the test object ...
+    {
+        name: "tmp object all over",
+        setup: function (tmp) {
+            tmp.global = window;
+            tmp.global.random = Math.random();
+        },
+        test: function (tmp) {
+            wru.assert(
+                tmp.global === window // true
+            );
+            wru.assert(
+                typeof tmp.global.random == "number" // true again
+            );
+        },
+        teardown: function (tmp) {
+            delete tmp.global.random;
+            delete tmp.global;
+        }
+    }
+
+
 the build process
 =================
 
