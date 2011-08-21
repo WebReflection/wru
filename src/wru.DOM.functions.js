@@ -81,7 +81,7 @@
         overallFatal += fatal[LENGTH];
         passTheInfo("(" + join.call([
             pass[LENGTH],
-            fail[LENGTH],
+            ci = fail[LENGTH],
             fatal[LENGTH]
         ], ", ") + ")");
         node = node.parentNode;

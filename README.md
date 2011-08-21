@@ -24,6 +24,8 @@ compatibility
 
 *wru* is compatible with basically all possible browsers out there included IE5.5, IE6, IE7, IE8, IE9, IE10, Chrome, Firefox, Safari, Webkit based, and Opera.
 
+On server side *wru* is compatible with latest *Rhino* and *node.js* versions. I swear if **I find an easy way to** easily **test Spider/Iron/JagerMonkey I will** include **support them** too.
+
 
 how to test wru
 ---------------
