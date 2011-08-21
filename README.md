@@ -281,7 +281,17 @@ As example: "*do you really need so much 'magic' to perform these tasks?*"
     // current enironment layout (HTML/Shell)
     wru.assert("oh come on but this is so easy!", 1);
 
-Just give it a try and fee free to trash it if you don't like to have your tests 100% under control ;-)
+Just give it a try ;-)
+
+
+wrap it if you want
+===================
+
+If you think *wru* is too simple, you still have a chance to improve it wrapping its basic methods and create something wonderful out of it.
+Arguments automations? Returned values? Expected number of calls per callback?
+
+The *wru* cross environment core is easy to hack for anybody, check [wru.js](https://github.com/WebReflection/wru/blob/master/src/wru.js) and your are already half way through ;-)
+
 
 license
 =======
