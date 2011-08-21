@@ -75,6 +75,25 @@ To know more about *wru* possibilities ... please keep reading ;-)
 
 
 wru API
+=======
+
+There are truly few things you need to know, and even less properties you need to configure!
+
+
+methods
 -------
 
-There are truly few things you need to know, and even less properties you need to configure
+  * `test(object)` or `test(arrayOfObjects)` to execute a test. A generic test object may have one or more properties:
+      * `test` property, as **function**, to execute the test with one or more `wru.assert()` or `wru.async()` calls
+      * `name` or `description` property, as **string**, to have visual knowledge of the current test **optional**
+      * `setup` property, as **function**, that will be executed right before the test: **optional**
+      * `teardown` property, as **function**, that will be executed right after the test: **optopnal**
+  * `assert("description", truishOrFalsyValue)` to manually assert whatever you want where **description is optional** (but suggested)
+  * `async("description", callback, timeout)` to tell *wru* that a test will be executed at some point later and where **both description and timeout are optionals**
+
+
+properties
+----------
+
+  * `random`, as `true` or `false`, to make tests order execution random (by default `false`)
+  * `node` on **web version only** to set a different node from the default one (which is an element with `id == "wru"`or the `document.body` or the `document.documentElement` if `body` is not present yet)
