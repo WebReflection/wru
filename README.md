@@ -38,7 +38,7 @@ If you forked the project, you made some change, and you want to **rebuild wru**
     // still inside wru folder
     python builder/build.py
 
-After the build process is finished, no more than 3 seconds, you should be able to run again the test for your own environment.
+After the build process is finished, no more than 3 seconds with forced waiting time included to read stats if build has been *double-clicked*, you should be able to run again the test for your own environment.
 
 
 wru basics
