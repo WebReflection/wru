@@ -108,23 +108,29 @@ how does wru work
 Every test is performed synchronously unless there is no `wru.async()` call. In latter case all tests after the current will be waiting for the asynchronous call to be executed.
 When it happens, if the asynchronous call performed one or more assertions, the framework keep going without requiring any extra step: is that easy!
 
-    // asynchronous test example
-    
-    // this will be synchronous
-    wru.assert("condition accepted", true);
-    
-    // this will be asynchronous
-    var xhr = new XMLHttpRequest;
-    xhr.open("get", "file.txt", true);
-    xhr.onreadystatechange = wru.async(function () {
-        if (this.readyState === 4) {
-            wru.assert("text is not empty", this.responseText.length);
+    // inside a test object ...
+    {
+        name: "load content",
+        test: function () {
+            // asynchronous test example
+            
+            // this will be synchronous
+            wru.assert("condition accepted", true);
+            
+            // this will be asynchronous
+            var xhr = new XMLHttpRequest;
+            xhr.open("get", "file.txt", true);
+            xhr.onreadystatechange = wru.async(function () {
+                if (this.readyState === 4) {
+                    wru.assert("text is not empty", this.responseText.length);
+                }
+            });
+            xhr.send(null);
+            
+            // this will be performed regardless
+            wru.assert("something else to check", 1);
         }
-    });
-    xhr.send(null);
-    
-    // this will be performed regardless
-    wru.assert("something else to check", 1);
+    }
 
 In above example, the `onreadystatechange` function may be executed many times on different `readyState`. The *wru* logic cannot care less about it since an asynchronous callback is considered *done* when **at least one assertion has been performed**.
 If this does not happen the internal `TIMEOUT` constant, by default 10 seconds, will kill the procedure.
