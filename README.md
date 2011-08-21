@@ -238,7 +238,7 @@ This is the list of files actually created by *wru build process* inside the *bu
 `wru.debug()` is automatically removed from built versions so that no evaluation of internals can be possible.
 
 
-License
+license
 =======
 
 *wru* unit test framework and the rest of the project is under Mit Style License
