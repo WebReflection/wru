@@ -58,6 +58,31 @@ JSBuilder.compile(
 print ("----------------------")
 print ("")
 
+# web template
+import string
+JSBuilder.write(
+    '../build/template.html',
+    string.replace(
+        string.replace(
+            JSBuilder.read(
+                '../src/template.html'
+            ),
+            '{{CSS}}',
+            JSBuilder.read(
+                '../src/template.css'
+            )
+        ),
+        '{{JS}}',
+        string.replace(
+            JSBuilder.read(
+                '../build/wru.min.js'
+            )[:-1],
+            'var wru=',
+            'wru('
+        ) + ');'
+    )
+)
+
 # let me read the result ...
 import time
 time.sleep(2)
