@@ -3,7 +3,7 @@
         //* load this timers fixes only if necessary
         load(
             new java.io.File(".").getCanonicalPath() + 
-            "/test/rhinoTimers.js"
+            "/src/rhinoTimers.js"
         );
         //*/
         
