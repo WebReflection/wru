@@ -1,6 +1,7 @@
-// from: http://j.mp/pV7mkC
+// revisited by Andrea Giammarchi
+// @link http://stackoverflow.com/questions/2261705/how-to-run-a-javascript-function-asynchronously-without-using-settimeout
 // glory and fortune to to Weston C.
-// but it's also RIDICULOUS Rhino does not implement in core timers properly
+// but it's also RIDICULOUS Rhino does not implement in core timers properly!
 
 var
     setTimeout,
