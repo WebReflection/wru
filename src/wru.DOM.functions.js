@@ -5,7 +5,7 @@
             (node = putItThereAndGimmeBack(
                 putItThereAndGimmeBack(wru.node, "div"),
                 "span"
-            )).innerHTML = (
+            ))[INNERHTML] = (
                 (iHasIt(current, NAME) && current[NAME])
                 ||
                 (iHasIt(current, DESCRIPTION) && current[DESCRIPTION])
@@ -61,7 +61,7 @@
             className = "pass";
             innerHTML = "Passed " + overallPass + " Tests";
         }
-        node.innerHTML = "<strong>" + innerHTML + "</strong>";
+        node[INNERHTML] = "<strong>" + innerHTML + "</strong>";
         node.className = className;
     }
     
@@ -71,7 +71,7 @@
     }
     
     function writeItOrdered(fail) {
-        node.innerHTML += "<ul>" + LISTART + join.call(fail, LIEND + LISTART) + LIEND + "</ul>";
+        node[INNERHTML] += "<ul>" + LISTART + join.call(fail, LIEND + LISTART) + LIEND + "</ul>";
         (node.onclick = showTheProblem).call(node);
     }
     

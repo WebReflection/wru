@@ -33,7 +33,7 @@
             (node = putItThereAndGimmeBack(
                 putItThereAndGimmeBack(wru.node, "div"),
                 "span"
-            )).innerHTML = (
+            ))[INNERHTML] = (
                 (iHasIt(current, NAME) && current[NAME])
                 ||
                 (iHasIt(current, DESCRIPTION) && current[DESCRIPTION])
@@ -89,7 +89,7 @@
             className = "pass";
             innerHTML = "Passed " + overallPass + " Tests";
         }
-        node.innerHTML = "<strong>" + innerHTML + "</strong>";
+        node[INNERHTML] = "<strong>" + innerHTML + "</strong>";
         node.className = className;
     }
     
@@ -99,7 +99,7 @@
     }
     
     function writeItOrdered(fail) {
-        node.innerHTML += "<ul>" + LISTART + join.call(fail, LIEND + LISTART) + LIEND + "</ul>";
+        node[INNERHTML] += "<ul>" + LISTART + join.call(fail, LIEND + LISTART) + LIEND + "</ul>";
         (node.onclick = showTheProblem).call(node);
     }
     
@@ -290,14 +290,13 @@
         FALSE = !TRUE,
         TIMEOUT = 100,
         EMPTY = " ",
-        SEPARATOR = ", ",
         UNKNOWN = "unknown",
         LENGTH = "length",
-        INNERHTML = "innerHTML",
         NAME = "name",
         DESCRIPTION = "description",
         LISTART = "<li>",
         LIEND = "</li>",
+        cursor = "\\|/-",
         hasOwnProperty = wru.hasOwnProperty,
         prefix = EMPTY,
         charAt = prefix.charAt,
@@ -316,7 +315,7 @@
         
         
         // these variables are used on DOM version only
-        cursor = "\\|/-",
+        INNERHTML = "innerHTML",
         document = window.document,
         createElement = document.createElement,
         

@@ -6,3 +6,4 @@
         // and re-assign window
         window = global;
     }
+    

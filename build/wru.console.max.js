@@ -272,14 +272,13 @@
         FALSE = !TRUE,
         TIMEOUT = 100,
         EMPTY = " ",
-        SEPARATOR = ", ",
         UNKNOWN = "unknown",
         LENGTH = "length",
-        INNERHTML = "innerHTML",
         NAME = "name",
         DESCRIPTION = "description",
         LISTART = "<li>",
         LIEND = "</li>",
+        cursor = "\\|/-",
         hasOwnProperty = wru.hasOwnProperty,
         prefix = EMPTY,
         charAt = prefix.charAt,
@@ -298,7 +297,6 @@
         
         
         // these variables are used on console version only
-        cursor = "\\|/-",
         ERROR = "[ERROR]",
         FAILURE = "[FAILURE]",
         OK = "[OK]",
@@ -318,6 +316,7 @@
         // and re-assign window
         window = global;
     }
+    
     // these are window/global object dependent
     // must be eventually defined after wru.export.js, if used
     Math = window.Math;

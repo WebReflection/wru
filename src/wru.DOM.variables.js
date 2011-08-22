@@ -1,6 +1,6 @@
         
         // these variables are used on DOM version only
-        cursor = "\\|/-",
+        INNERHTML = "innerHTML",
         document = window.document,
         createElement = document.createElement,
         
