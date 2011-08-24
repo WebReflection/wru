@@ -30,6 +30,9 @@ On server side *wru* is compatible with latest **Rhino** and **node.js** version
 how to test wru
 ---------------
 
+The simplest way to test wru is to use [template.html](https://raw.github.com/WebReflection/wru/master/build/template.html) for **web** tests or [template.js](https://raw.github.com/WebReflection/wru/master/build/template.js) for **server** tests.
+With these 2 options you don't even need to fork or download the entire repository ... but if you do that ...
+
 From *wru* root directory, simply run these commands accordingly with what you want to test:
 
     // node.js test
