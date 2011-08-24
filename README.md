@@ -370,6 +370,14 @@ Sure you do :-)
 Similar technique if you need same teardown call per each test.
 
 
+I need other edge cases too !
+=============================
+
+The cool part is that being simple, *wru* is also highly customizable.
+Please keep an eye in the [solutions.html](https://github.com/WebReflection/wru/blob/master/test/solutions.html) file.
+I will try to update it as soon as some *request or edge case* comes up.
+
+
 wrap it if you want
 ===================
 
