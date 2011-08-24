@@ -113,7 +113,7 @@
             fatal[LENGTH]
         ], ", ") + ")");
         node = node.parentNode;
-        fatal.length ?
+        fatal[LENGTH] ?
             writeItOrdered(fatal, prefix = "error")
             : (
                 ci ?
