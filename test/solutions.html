@@ -11,10 +11,10 @@ wru.test([
         teardown: cleanGroupName
     }, {
         name: "test 1",
-        test: wru.assert
+        test: wru.assert // function as place holder, will assert the tmp object
     }, {
         name: "test 2",
-        test: wru.assert
+        test: wru.assert // function as place holder, will assert the tmp object
     }, {
         name: "<h3 class='group'>assertions tricks</h3>",
         teardown: cleanGroupName
@@ -39,6 +39,41 @@ wru.test([
                 3 === wru.assertions
             );
             delete wru.assertions;
+        }
+    }, {
+        name: "<h3 class='group'>asynchronous tricks</h3>",
+        teardown: cleanGroupName
+    }, {
+        name: "the double asynchronous possibility",
+        test: function () {
+            // lets say it is not about the server
+            // it's about the image object
+            var img = new Image;
+            
+            // how to set two asnchronous calls
+            // knowing that only one of them will be fired?
+            var onevent = wru.async("onevent", function (description, assertion) {
+                wru.assert(description, assertion);
+            });
+            
+            // now there is an async call, wru will wait for it
+            // to be sure we'll trigger it ...
+            
+            img.onload = function () {
+                // invoke the asynchronous call
+                onevent("image loaded", true);
+            };
+            
+            img.onerror = function () {
+                onevent(
+                    "server side problems but image worked",
+                    img instanceof Image
+                );
+            };
+            
+            // now we can set the src
+            img.src = "invalid.invalid";
+            
         }
     }
 ]);
