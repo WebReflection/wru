@@ -238,7 +238,7 @@
                     // the original callback is called with proper *this* if specified
                     try {
                         callback.apply(this, arguments);
-                    } catch($) {
+                    } catch(doooodeThisIsBAD) {
                         // if there is an Error
                         // the test is screwed up
                         // called has to be set as *TRUE* to invalidate the test

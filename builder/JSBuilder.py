@@ -32,6 +32,12 @@ def write(file, content):
     f.write(content)
     f.close()
 
+# utility
+def replace(content, search, replace):
+    for i in range(len(search)):
+        content = string.replace(content, search[i], replace[i])
+    return content
+
 # well ... this simply works as well :-D
 def compile(copyright, fullName, minName, files, search=None, replace=None):
     
@@ -54,8 +60,7 @@ def compile(copyright, fullName, minName, files, search=None, replace=None):
     
     # replace something if necessary
     if search != None:
-        for i in range(len(search)):
-            content = string.replace(content, search[i], replace[i])
+        content = replace(content, search, replace)
     
     # strip out code that should not be in the minified version
     cleanContent = re.sub(r'//\^[^\x00]*?//\$[^\n\r]+', '', content)

@@ -58,28 +58,52 @@ JSBuilder.compile(
 print ("----------------------")
 print ("")
 
-# web template
-import string
+# templates
+import string, re
+
+# web
 JSBuilder.write(
     '../build/template.html',
-    string.replace(
-        string.replace(
-            JSBuilder.read(
-                '../src/template.html'
-            ),
+    JSBuilder.replace(
+        JSBuilder.read('../src/template.html'),
+        [
             '{{CSS}}',
-            JSBuilder.read(
-                '../src/template.css'
-            )
-        ),
-        '{{JS}}',
-        string.replace(
-            JSBuilder.read(
-                '../build/wru.min.js'
-            )[:-1],
+            '{{JS}}',
             'var wru=',
-            'wru('
-        ) + ');'
+            '}(this);'
+        ],
+        [
+            JSBuilder.read('../src/template.css'),
+            JSBuilder.read('../build/wru.min.js'),
+            'wru(',
+            '}(this));'
+        ]
+    )
+)
+
+# server
+JSBuilder.write(
+    '../build/template.js',
+    JSBuilder.replace(
+        JSBuilder.read('../src/template.js'),
+        [
+            '{{rhinoTimers}}',
+            '/*var id = ',
+            '{{JS}}',
+            'var wru=',
+            '}(this);'
+        ],
+        [
+            re.sub(
+                r'(var[^\x00]*?;)',
+                '/*\\1//*/',
+                JSBuilder.read('../src/rhinoTimers.js')
+            ),
+            'var id = ',
+            JSBuilder.read('../build/wru.console.js'),
+            'wru(',
+            '}(this));'
+        ]
     )
 )
 
