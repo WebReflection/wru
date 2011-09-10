@@ -8,9 +8,9 @@
         },{
             name: "async test",
             test: function () {
-                setTimeout(wru.async(function () {
-                    wru.assert("OK", true);
-                }), 2000);
+                setTimeout(wru.async(function (arg) {
+                    wru.assert("OK", "OK" === arg);
+                }), 2000, "OK");
             }
         },{
             name: "test that should fail",

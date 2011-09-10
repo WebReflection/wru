@@ -67,7 +67,7 @@ if (typeof global=="function") {
     function schedule(fn, delay, args, interval) {
         var id = ++counter;//*/
         ids[id] = new JavaAdapter(java.util.TimerTask,{run: function () {
-            fn.apply(args);
+            fn.apply(null, args);
         }});
         interval ?
             timer.schedule(ids[id], delay, delay)
