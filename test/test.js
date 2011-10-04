@@ -1,9 +1,24 @@
-        // Rhino specific test
         
-        load(
-            new java.io.File(".").getCanonicalPath() + 
-            "/build/wru.console.js"
-        );
+        // node, rhino, and web
+        try {
+            // node
+            var wru = require("./../build/wru.console").wru;
+        } catch(wru) {
+            // rhino
+            try {
+                load(
+                    new java.io.File(".").getCanonicalPath() + 
+                    "/build/wru.console.js"
+                );
+            } catch(wru) {
+                // html (assuming test.html is used in same folders structure)
+                (function(xhr){
+                    xhr.open("get", "./../build/wru.min.js", false);
+                    xhr.send(null);
+                    Function(xhr.responseText.replace(/var wru=/,"this.wru=")).call(window);
+                }(new XMLHttpRequest));
+            }
+        }
         
         wru.test([{
             name: "test that should pass",

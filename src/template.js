@@ -29,9 +29,4 @@ wru.test([
 
 
 // wru related code
-
-if (typeof global=="function") {
-    {{rhinoTimers}}
-    
-}
 {{JS}}

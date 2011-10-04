@@ -2,7 +2,7 @@
 
 copyright = '(C) Andrea Giammarchi, @WebReflection - Mit Style License'
 
-import JSBuilder
+import JSBuilder, string, re
 
 # embedded DOM version for HTML tests
 print ("")
@@ -41,6 +41,7 @@ JSBuilder.compile(
     'build/wru.console.max.js',
     'build/wru.console.js',
     [
+        "rhinoTimers.js",
         "wru.intro.js",
         "wru.console.functions.js",
         "wru.functions.js",
@@ -55,11 +56,17 @@ JSBuilder.compile(
         "wru.outro.js"
     ]
 )
+
+# YUICompressor bug fixed after build
+compiled = JSBuilder.read('../build/wru.console.js')
+compiled = re.sub(r'\w+=global.setInterval=', 'setInterval=global.setInterval=', compiled)
+compiled = re.sub(r'\w+=global.setTimeout=', 'setTimeout=global.setTimeout=', compiled)
+compiled = re.sub(r'\w+=global.clearInterval=', 'clearInterval=global.clearInterval=', compiled)
+compiled = re.sub(r'\w+=global.clearTimeout=', 'clearTimeout=global.clearTimeout=', compiled)
+JSBuilder.write('../build/wru.console.js', compiled)
+
 print ("----------------------")
 print ("")
-
-# templates
-import string, re
 
 # web
 JSBuilder.write(
@@ -87,19 +94,11 @@ JSBuilder.write(
     JSBuilder.replace(
         JSBuilder.read('../src/template.js'),
         [
-            '{{rhinoTimers}}',
-            '/*var id = ',
             '{{JS}}',
             'var wru=',
             '}(this);'
         ],
         [
-            re.sub(
-                r'(var[^\x00]*?;)',
-                '/*\\1//*/',
-                JSBuilder.read('../src/rhinoTimers.js')
-            ),
-            'var id = ',
             JSBuilder.read('../build/wru.console.js'),
             'wru(',
             '}(this));'
