@@ -51,7 +51,7 @@
                     push.call(fail, description);
                     
                     // if there is no reason to waitForIt then is time to call Dary()
-                    --waitForIt || Dary();
+                    --waitForIt || (daryTimeout = setTimeout(Dary, 0));
                 },
                     // timeout can be specified
                     // this procedure ensure that it's
@@ -109,7 +109,7 @@
                         clearTimeout(timeout);
                         
                         // if there is no reason to waitForIt then is time to call Dary()
-                        --waitForIt || Dary();
+                        --waitForIt || (daryTimeout = setTimeout(Dary, 0));
                     }
                 };
             },

@@ -25,4 +25,5 @@
         overallPass = 0,
         overallFail = 0,
         overallFatal = 0,
+        daryTimeout = 0,
         

@@ -94,7 +94,6 @@ var wru = function (window) {"use strict";
             tmp = {};
             giveItATry("setup");
             fatal[LENGTH] || giveItATry("test");
-            giveItATry("teardown");
             waitForIt || Dary();
         } else {
             showSummary();
@@ -149,6 +148,8 @@ var wru = function (window) {"use strict";
     }
     
     function Dary() {
+        clearTimeout(daryTimeout);
+        giveItATry("teardown");
         overallPass += pass[LENGTH];
         overallFail += fail[LENGTH];
         overallFatal += fatal[LENGTH];
@@ -239,7 +240,7 @@ var wru = function (window) {"use strict";
                     push.call(fail, description);
                     
                     // if there is no reason to waitForIt then is time to call Dary()
-                    --waitForIt || Dary();
+                    --waitForIt || (daryTimeout = setTimeout(Dary, 0));
                 },
                     // timeout can be specified
                     // this procedure ensure that it's
@@ -297,7 +298,7 @@ var wru = function (window) {"use strict";
                         clearTimeout(timeout);
                         
                         // if there is no reason to waitForIt then is time to call Dary()
-                        --waitForIt || Dary();
+                        --waitForIt || (daryTimeout = setTimeout(Dary, 0));
                     }
                 };
             },
@@ -351,6 +352,7 @@ var wru = function (window) {"use strict";
         overallPass = 0,
         overallFail = 0,
         overallFatal = 0,
+        daryTimeout = 0,
         
         
         // these variables are used on console version only

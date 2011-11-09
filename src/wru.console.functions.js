@@ -16,7 +16,6 @@
             tmp = {};
             giveItATry("setup");
             fatal[LENGTH] || giveItATry("test");
-            giveItATry("teardown");
             waitForIt || Dary();
         } else {
             showSummary();
@@ -71,6 +70,8 @@
     }
     
     function Dary() {
+        clearTimeout(daryTimeout);
+        giveItATry("teardown");
         overallPass += pass[LENGTH];
         overallFail += fail[LENGTH];
         overallFatal += fatal[LENGTH];

@@ -46,7 +46,6 @@
             tmp = {};
             giveItATry("setup");
             fatal[LENGTH] || giveItATry("test");
-            giveItATry("teardown");
             waitForIt || Dary();
         } else {
             showSummary();
@@ -104,6 +103,8 @@
     }
     
     function Dary() {
+        clearTimeout(daryTimeout);
+        giveItATry("teardown");
         overallPass += pass[LENGTH];
         overallFail += fail[LENGTH];
         overallFatal += fatal[LENGTH];
@@ -200,7 +201,7 @@
                     push.call(fail, description);
                     
                     // if there is no reason to waitForIt then is time to call Dary()
-                    --waitForIt || Dary();
+                    --waitForIt || (daryTimeout = setTimeout(Dary, 0));
                 },
                     // timeout can be specified
                     // this procedure ensure that it's
@@ -258,7 +259,7 @@
                         clearTimeout(timeout);
                         
                         // if there is no reason to waitForIt then is time to call Dary()
-                        --waitForIt || Dary();
+                        --waitForIt || (daryTimeout = setTimeout(Dary, 0));
                     }
                 };
             },
@@ -312,6 +313,7 @@
         overallPass = 0,
         overallFail = 0,
         overallFatal = 0,
+        daryTimeout = 0,
         
         
         // these variables are used on DOM version only

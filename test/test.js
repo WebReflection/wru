@@ -44,5 +44,12 @@
                 wru.assert("it's an error", 1);
                 WTF++;
             }
+        },{
+            name: "test that should be pass synchronously even if the callback was created via async",
+            test: function () {
+                var executed = 0;
+                wru.async(function () {wru.assert(++executed)})();
+                wru.assert(executed);
+            }
         }]);
         
