@@ -70,8 +70,7 @@
     }
     
     function Dary() {
-        clearTimeout(daryTimeout);
-        giveItATry("teardown");
+        clearDaryTimeou();
         overallPass += pass[LENGTH];
         overallFail += fail[LENGTH];
         overallFatal += fatal[LENGTH];

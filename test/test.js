@@ -20,6 +20,10 @@
             }
         }
         
+        var
+            setup, teardown
+        ;
+        
         wru.test([{
             name: "test that should pass",
             test: function () {
@@ -30,7 +34,15 @@
             test: function () {
                 setTimeout(wru.async(function (arg) {
                     wru.assert("OK", "OK" === arg);
+                    wru.assert(setup === 1);
+                    wru.assert(teardown == null);
                 }), 2000, "OK");
+            },
+            setup: function () {
+                setup = 1;
+            },
+            teardown: function () {
+                teardown = 1;
             }
         },{
             name: "test that should fail",

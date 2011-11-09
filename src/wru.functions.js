@@ -17,3 +17,11 @@
         return random() < .5 ? -1 : 1;
     }
     
+    function clearDaryTimeou() {
+        if (daryTimeout) {
+            clearTimeout(daryTimeout);
+            daryTimeout = 0;
+        }
+        giveItATry("teardown");
+    }
+    

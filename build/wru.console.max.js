@@ -148,8 +148,7 @@ var wru = function (window) {"use strict";
     }
     
     function Dary() {
-        clearTimeout(daryTimeout);
-        giveItATry("teardown");
+        clearDaryTimeou();
         overallPass += pass[LENGTH];
         overallFail += fail[LENGTH];
         overallFatal += fatal[LENGTH];
@@ -185,6 +184,14 @@ var wru = function (window) {"use strict";
     
     function messItUp() {
         return random() < .5 ? -1 : 1;
+    }
+    
+    function clearDaryTimeou() {
+        if (daryTimeout) {
+            clearTimeout(daryTimeout);
+            daryTimeout = 0;
+        }
+        giveItATry("teardown");
     }
     
     
