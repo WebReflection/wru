@@ -23,13 +23,20 @@
         }
     }
     
-    function log(info) {
+    function log(info, avoidNewLine) {
+        info = info + (avoidNewLine ? "" : "\n");
         try {
-            // node.js
-            require("sys").print(info + "\n");
-        } catch($) {
-            // rhino
-            print(info);
+            // node 0.6
+            require("util").print(info);
+        } catch(up) {
+            try {
+                // node 0.4
+                require("sys").print(info);
+            } catch(up) {
+                // hello Rhino
+                // print uses println ... while we need print without \n
+                java.lang.System.out.print(info);
+            }
         }
     }
     

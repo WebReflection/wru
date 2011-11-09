@@ -3,6 +3,8 @@
 */
 /**@license (C) Andrea Giammarchi, @WebReflection - Mit Style License
 */// revisited by Andrea Giammarchi, @WebReflection
+// compatible with both Rhino and Node
+// now it is possible to include this file in the server console without rhinoTimers dependencies
 // @link http://stackoverflow.com/questions/2261705/how-to-run-a-javascript-function-asynchronously-without-using-settimeout
 // glory and fortune to to Weston C for the inital hint
 // but it's also RIDICULOUS Rhino does not implement in core timers properly!
@@ -99,13 +101,20 @@ var wru = function (window) {"use strict";
         }
     }
     
-    function log(info) {
+    function log(info, avoidNewLine) {
+        info = info + (avoidNewLine ? "" : "\n");
         try {
-            // node.js
-            require("sys").print(info + "\n");
-        } catch($) {
-            // rhino
-            print(info);
+            // node 0.6
+            require("util").print(info);
+        } catch(up) {
+            try {
+                // node 0.4
+                require("sys").print(info);
+            } catch(up) {
+                // hello Rhino
+                // print uses println ... while we need print without \n
+                java.lang.System.out.print(info);
+            }
         }
     }
     
@@ -350,7 +359,6 @@ var wru = function (window) {"use strict";
         OK = "\033[0;32mOK\033[0m",
         OUTPUT_SEPARATOR = "------------------------------",
         
-        
         // shared across the whole private scope
         Math, abs, random, setTimeout, clearTimeout,
         current, node, pass, fail, fatal, tmp, called
@@ -375,7 +383,7 @@ var wru = function (window) {"use strict";
         
     // "THE CURSOR" http://3site.eu/cursor
     window.setInterval(function () {
-        waitForIt && log(EMPTY + charAt.call(cursor, ci++%4) + "\033[<1>A");
+        waitForIt && log(EMPTY + charAt.call(cursor, ci++%4) + "\b\b", true);
     }, TIMEOUT);
     
     
