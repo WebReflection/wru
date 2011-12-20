@@ -30,8 +30,9 @@ On server side *wru* is compatible with latest **node.js**, **Rhino** and **Phan
 how to test wru
 ---------------
 
-The simplest way to test wru is to use [template.html](https://raw.github.com/WebReflection/wru/master/build/template.html) for **web** tests or [template.js](https://raw.github.com/WebReflection/wru/master/build/template.js) for **server** tests.
-With these 2 options you don't even need to fork or download the entire repository ... but if you do that ...
+The simplest way to test wru is to use [template.html](https://raw.github.com/WebReflection/wru/master/build/template.html) for **web** tests or [template.js](https://raw.github.com/WebReflection/wru/master/build/template.js) for **node** and **rhino** tests or [template.phantom.js](https://github.com/WebReflection/wru/blob/master/build/template.phantom.js) for **PhantomJS** tests.
+
+With these 3 options you don't even need to fork or download the entire repository ... but if you do that ...
 
 From *wru* root directory, simply run these commands accordingly with what you want to test:
 
