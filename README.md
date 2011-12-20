@@ -1,22 +1,22 @@
 wru :: unit tests have never been that easy
 ===========================================
 
-*wru* is an **essential unit test framework** compatible with **web** environment, [node.js](http://nodejs.org/) and [Rhino](http://www.mozilla.org/rhino/) as well.
+*wru* is an **essential unit test framework** compatible with **web** environment, [node.js](http://nodejs.org/), [Rhino](http://www.mozilla.org/rhino/), and now [PhantomJS](http://www.phantomjs.org/) too.
 
 
 features
 --------
 
-  * **runs in both client and server environments**, compatible with html files, node.js, and Rhino
+  * **runs in both client and server environments**, compatible with html files, node.js, Rhino, and PhantomJS
   * **both synchronous and asynchronous tests** in an absolutely intuitive way
   * **ES5 and JS.next ready**, compatible with `"use strict"` directive which means no `with` statements, `eval`, or misused `this` references
   * **easy**, probably the easiest way to test JS code out there thanks to its simplified API: `test`, `assert`, and `async` ... you already remember "*all of them*", isn't it?
   * **unobtrusive** and **self defensive**, since everything that could possibly change in such dynamic environment as JS is, is "*sandboxed*" inside the *wru closure*. This means no matter how "*nasty*" your code is, *wru* won't pollute or change the global environment, neither it will rely in native *constructor.prototypes* changes (`Array.prototype.push = ...` or `Object.prototype.hasOwnProperty = ...`? not a problem!)
-  * **cursor included in both web and console** ... you gonna realize how much "[THE CURSOR](http://www.3site.eu/cursor/)" is important, specially to understand if your test is **stuck** or simply "*waiting for*" ... cursor is working in both Unix and OSX consoles
+  * **cursor included in both web and console** ... you gonna realize how much "[THE CURSOR](http://www.3site.eu/cursor/)" is important, specially to understand if your test is **stuck** or simply "*waiting for*" ... cursor is working in both Unix and OSX consoles (unfortunately PhantomJS does not support the cursor)
   * **tiny**, even if it's not important in Unit Tests world, *wru* fits into about 2Kb (1.2Kb *minzpped*) which means not much to fix or change here, just a simple, reliable, and essential framework for your tests
   * **under your control**, since there is absolutely **no magic behind the *wru* scene**. You assert what you want, you async what you need, you describe what's needed, and you are *ready to go* in less than 5 minutes
 
-If you can't believe it check [html](https://github.com/WebReflection/wru/blob/master/test/test.html), [node.js](https://github.com/WebReflection/wru/blob/master/test/testnode.js), or [Rhino](https://github.com/WebReflection/wru/blob/master/test/testrhino.js) test and see how *wru* does work ;-)
+If you can't believe it check [html](https://github.com/WebReflection/wru/blob/master/test/test.html), [node.js](https://github.com/WebReflection/wru/blob/master/test/testnode.js), [Rhino](https://github.com/WebReflection/wru/blob/master/test/testrhino.js), or [PhantomJS](https://github.com/WebReflection/wru/blob/master/test/phantom.js) test and see how *wru* does work ;-)
 
 
 compatibility
@@ -24,7 +24,7 @@ compatibility
 
 *wru* is compatible with basically all possible browsers out there included **IE5.5**, **IE6**, **IE7**, **IE8**, **IE9**, **IE10**, **Chrome**, **Firefox**, **Safari**, **Webkit** based, **Mobile Browsers**, and **Opera**.
 
-On server side *wru* is compatible with latest **Rhino** and **node.js** versions. I swear if *I find an easy way to* easily *test Spider/Iron/JagerMonkey I will* include *support them* too.
+On server side *wru* is compatible with latest **node.js**, **Rhino** and **PhantomJS** versions. I swear if *I find an easy way to* easily *test Spider/Iron/JagerMonkey I will support them* too.
 
 
 how to test wru
@@ -36,13 +36,26 @@ With these 2 options you don't even need to fork or download the entire reposito
 From *wru* root directory, simply run these commands accordingly with what you want to test:
 
     // node.js test
-    node test/testnode.js
+    node test/test.js
     
     // Rhino
-    java -jar builder/jar/js.jar test/testrhino.js
+    java -jar builder/jar/js.jar test/test.js
+	
+    // PhantomJS test
+    phantomjs test/phantom.js
     
     // web (through Mac OSX but you can open test.html with any browser)
     open test/test.html
+
+**PhantomJS** supports tests for both plain JavaScript in a blank page, or any url adding it as argument.
+
+	// PhantomJS test on about:blank
+	phantomjs build/template.phantom.js
+	
+    // PhantomJS test on any url
+    phantomjs build/template.phantom.js "http://yourwebsite.com"
+
+**PhantomJS** tests should always starts when the DOM has been already parsed.
 
 If you forked the project, you made some change, and you want to **rebuild wru**, this is all you have to do:
 
