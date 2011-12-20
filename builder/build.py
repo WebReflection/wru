@@ -106,6 +106,24 @@ JSBuilder.write(
     )
 )
 
+# phantomjs
+JSBuilder.write(
+    '../build/template.phantom.js',
+    'var page=new WebPage;page.open(phantom.args[0]||"about:blank",function(){page.evaluate(function(){' + JSBuilder.replace(
+        JSBuilder.read('../src/template.js'),
+        [
+            '{{JS}}',
+            'var wru=',
+            '}(this);'
+        ],
+        [
+            'window.phantomExit=false;window.quit=function(){window.phantomExit=true};window.require=function(){return{wru:window.wru}};window.global=window;\n' + JSBuilder.read('../build/wru.console.js'),
+            'wru(',
+            '}(this));'
+        ]
+    ) + '\n});page.onConsoleMessage=function(msg){if (!/^\s+(?:\\\\|\\/|\\||\\-)/.test(msg))console.log(msg.replace("\\n",""))};setInterval(function(){page.evaluate(function(){return window.phantomExit})&&phantom.exit()})});'
+)
+
 # let me read the result ...
 import time
 time.sleep(2)

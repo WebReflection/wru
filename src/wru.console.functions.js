@@ -32,9 +32,14 @@
                 // node 0.4
                 require("sys").print(info);
             } catch(up) {
-                // hello Rhino
-                // print uses println ... while we need print without \n
-                java.lang.System.out.print(info);
+                try {
+                    // hello Rhino
+                    // print uses println ... while we need print without \n
+                    java.lang.System.out.print(info);
+                } catch(up) {
+                    // phantomjs or default fallback
+                    console.log(info);
+                }
             }
         }
     }
@@ -55,7 +60,7 @@
         try {
             // node.js
             process.exit();
-        } catch($) {
+        } catch(up) {
             // rhino
             quit();
         }
