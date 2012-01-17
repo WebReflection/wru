@@ -1,6 +1,6 @@
 {
     "name": "wru"
-  , "version": "0.1.3"
+  , "version": "0.1.4"
   , "description": "sync and async unit tests have never been that easy"
   , "homepage": "https://github.com/WebReflection/wru"
   , "keywords": ["test", "unit", "async", "sync", "asynchronous", "rhino", "browser"]
