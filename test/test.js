@@ -2,7 +2,7 @@
         // node, rhino, and web
         try {
             // node
-            var wru = require("./../build/wru.console").wru;
+            var wru = require("./../build/wru.console");
         } catch(wru) {
             // rhino
             try {

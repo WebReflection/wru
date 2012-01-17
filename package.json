@@ -1,5 +1,14 @@
 {
-  "name": "wru",
-  "version": "0.1.1",
-  "main":"./build/wru.console.js"
+    "name": "wru"
+  , "version": "0.1.2"
+  , "description": "sync and async unit tests have never been that easy"
+  , "homepage": "https://github.com/WebReflection/wru"
+  , "keywords": ["test", "unit", "async", "sync", "asynchronous", "rhino", "browser"]
+  , "author": "Andrea Giammarchi"
+  , "repository":{
+        "type": "git"
+      , "url": "https://github.com/WebReflection/wru.git"
+    }
+  , "main": "build/wru.console.js"
+  , "engines": { "node": ">= 0.4.0" }
 }
