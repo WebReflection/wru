@@ -30,6 +30,9 @@
     function isGonnaBeLegen() {
         current = shift.call(queue);
         if (current) {
+            if (typeof current == "function") {
+                current = {name: current[NAME] || "anonymous", test: current};
+            }
             (node = putItThereAndGimmeBack(
                 putItThereAndGimmeBack(wru.node, "div"),
                 "span"
@@ -364,6 +367,14 @@
     };
     //$ and this block is removed at build time
     
+
+    wru.log = function log(obj, alertOnly) {
+        alertOnly ?
+            alert(obj) :
+            (typeof console != "undefined") && console.log(obj)
+        ;
+    };
+
     
     TIMEOUT *= TIMEOUT; // by default, timeout is 10000 (10 seconds)
                         // this is the place you can set it, e.g.

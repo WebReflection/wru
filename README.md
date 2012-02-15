@@ -1,7 +1,7 @@
-wru :: unit tests have never been that easy
-===========================================
+wru :: JavaScript tests have never been that easy
+=================================================
 
-*wru* is an **essential unit test framework** compatible with **web** environment, [node.js](http://nodejs.org/), [Rhino](http://www.mozilla.org/rhino/), and now [PhantomJS](http://www.phantomjs.org/) too.
+*wru* is an **essential general purpose test framework** compatible with **web** environment, [node.js](http://nodejs.org/), [Rhino](http://www.mozilla.org/rhino/), and now [PhantomJS](http://www.phantomjs.org/) too.
 
 
 features
@@ -10,7 +10,7 @@ features
   * **runs in both client and server environments**, compatible with html files, node.js, Rhino, and PhantomJS
   * **both synchronous and asynchronous tests** in an absolutely intuitive way
   * **ES5 and JS.next ready**, compatible with `"use strict"` directive which means no `with` statements, `eval`, or misused `this` references
-  * **easy**, probably the easiest way to test JS code out there thanks to its simplified API: `test`, `assert`, and `async` ... you already remember "*all of them*", isn't it?
+  * **easy**, probably the easiest way to test JS code out there thanks to its simplified API: `test`, `assert`, `async`, and `log` ... you already remember "*all of them*", isn't it?
   * **unobtrusive** and **self defensive**, since everything that could possibly change in such dynamic environment as JS is, is "*sandboxed*" inside the *wru closure*. This means no matter how "*nasty*" your code is, *wru* won't pollute or change the global environment, neither it will rely in native *constructor.prototypes* changes (`Array.prototype.push = ...` or `Object.prototype.hasOwnProperty = ...`? not a problem!)
   * **cursor included in both web and console** ... you gonna realize how much "[THE CURSOR](http://www.3site.eu/cursor/)" is important, specially to understand if your test is **stuck** or simply "*waiting for*" ... cursor is working in both Unix and OSX consoles (unfortunately PhantomJS does not support the cursor)
   * **tiny**, even if it's not important in Unit Tests world, *wru* fits into about 2Kb (1.2Kb *minzpped*) which means not much to fix or change here, just a simple, reliable, and essential framework for your tests
@@ -120,6 +120,7 @@ methods
       * `teardown` property, as **function**, that will be executed right after the test: **optopnal**
   * `assert("description", truishOrFalsyValue)` to manually assert whatever you want where **description is optional** (but suggested) and the assertion is compatible with *truish* or *falsy* values. You are in charge of strictly compared results if necessary by *===* operator, nothing new to learn here
   * `async("description", callback, timeout)` to tell *wru* that a test will be executed at some point later and where **both description and timeout are optionals**
+  * `log(anything, forceFallback)` the equivalent of *console.log(obj)* where supported, the equivalent of *alert()* or *print()* if the *forceFallback* flag is set to true (or better, *truish*)
 
 
 properties
@@ -127,6 +128,16 @@ properties
 
   * `random`, as `true` or `false`, to make tests order execution random (by default `false`)
   * `node` on **web version only** to set a different node from the default one (which is an element with `id == "wru"`or the `document.body` or the `document.documentElement` if `body` is not present yet)
+
+
+test properties
+---------------
+Each test can be either an object or, if you are that lazy typer, a function.
+
+  * `name` as test *title* or *test name*, if the test is a function the function name (expression or declared) will be used where available, anonymous otherwise.
+  * `setup` as function to do something before the test is executed. Bear in mind every test will receive a freshly baked object as argument, from setup, to test, and teardown, the same object. Use it if you need.
+  * `test` as function to execute if the test is not a function itself. Receives the shared object per test as first argument.
+  * `teardown` as function to do something after the test is executed. Receives the same shared object setup and test receive as argument.
 
 
 how does wru work

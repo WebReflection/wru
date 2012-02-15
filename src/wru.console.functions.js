@@ -2,6 +2,9 @@
     function isGonnaBeLegen() {
         current = shift.call(queue);
         if (current) {
+            if (typeof current == "function") {
+                current = {name: current[NAME] || "anonymous", test: current};
+            }
             log(OUTPUT_SEPARATOR);
             log(
                 (iHasIt(current, NAME) && current[NAME])

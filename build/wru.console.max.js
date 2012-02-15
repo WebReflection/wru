@@ -80,6 +80,9 @@ var wru = function (window) {"use strict";
     function isGonnaBeLegen() {
         current = shift.call(queue);
         if (current) {
+            if (typeof current == "function") {
+                current = {name: current[NAME] || "anonymous", test: current};
+            }
             log(OUTPUT_SEPARATOR);
             log(
                 (iHasIt(current, NAME) && current[NAME])
@@ -378,6 +381,18 @@ var wru = function (window) {"use strict";
         current, node, pass, fail, fatal, tmp, called
     ;
     
+
+    wru.log = function (obj, printOnly) {
+        try {
+            if (printOnly) {
+                throw new Error;
+            }
+            console.log(obj);
+        } catch(o_O) {
+            log(obj, 0);
+        }
+    };
+
     // node.js exports
     if (typeof global != "function") {
 
@@ -385,6 +400,7 @@ var wru = function (window) {"use strict";
         window.assert = wru.assert;
         window.async = wru.async;
         window.test = wru.test;
+        window.log = wru.log;
         window.random = false;
 
         // re-assign window to make it global

@@ -25,6 +25,7 @@ JSBuilder.compile(
         "wru.DOM.node.js",
         "wru.DOM.cursor.js",
         "wru.debug.js",
+        "wru.DOM.log.js",
         "wru.outro.js"
     ]
 )
@@ -49,6 +50,7 @@ JSBuilder.compile(
         "wru.variables.js",
         "wru.console.variables.js",
         "wru.shared.js",
+        "wru.console.log.js",
         "wru.export.js",
         "wru.global.shortcuts.js",
         "wru.console.cursor.js",
