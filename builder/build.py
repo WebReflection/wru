@@ -126,6 +126,14 @@ JSBuilder.write(
     ) + '\n});page.onConsoleMessage=function(msg){if (!/^\s+(?:\\\\|\\/|\\||\\-)/.test(msg))console.log(msg.replace("\\n",""))};setInterval(function(){page.evaluate(function(){return window.phantomExit})&&phantom.exit()})});'
 )
 
+JSBuilder.write(
+    '../node/wru.console.js',
+    JSBuilder.read('../build/wru.console.js')
+);
+
+import os
+os.system('cp build/wru.console.js node/wru.console.js');
+
 # let me read the result ...
 import time
 time.sleep(2)
