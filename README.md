@@ -415,7 +415,7 @@ The *wru* cross environment core is easy to hack for anybody, check [wru.js](htt
 license
 =======
 
-*wru* unit test framework and the rest of the project is under Mit Style License
+*wru* general purpose test framework and the rest of the project is under Mit Style License
 
     Copyright (C) 2011 by Andrea Giammarchi, @WebReflection
     
