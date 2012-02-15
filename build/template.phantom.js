@@ -1,5 +1,5 @@
 var page=new WebPage;page.open(phantom.args[0]||"about:blank",function(){page.evaluate(function(){// https://github.com/WebReflection/wru
-function wru(wru){var assert=wru.assert,async=wru.async;
+function wru(wru){var assert=wru.assert,async=wru.async,log=wru.log;
 
 // enojy your tests!
 
