@@ -62,10 +62,13 @@ If you forked the project, you made some change, and you want to **rebuild wru**
 
     // still inside wru folder
     python builder/build.py
+    
+    // or now with node
+    node builder/build.js
 
 After the build process is finished, no more than 3 seconds with forced waiting time included to read stats if build has been *double-clicked*, you should be able to run again the test for your own environment.
 
-Please bear in mind **JSbuilder.py** works with **Python < 3** (2.6 or 2.7 are fine) so be sure you have it (you should by default on Mac or Linux).
+Please bear in mind **JSbuilder.py** works with **node-js 0.6+** or **Python < 3** (2.6 or 2.7 are fine) so be sure you have it (you should by default on Mac or Linux).
 
 
 wru basics
