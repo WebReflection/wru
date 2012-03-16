@@ -1,3 +1,8 @@
+/*!
+(C) Andrea Giammarchi, @WebReflection - Mit Style License
+*/
+/**@license (C) Andrea Giammarchi, @WebReflection - Mit Style License
+*/
 // revisited by Andrea Giammarchi, @WebReflection
 // compatible with both Rhino and Node
 // now it is possible to include this file in the server console without rhinoTimers dependencies
@@ -5,53 +10,66 @@
 // glory and fortune to to Weston C for the inital hint
 // but it's also RIDICULOUS Rhino does not implement in core timers properly!
 
-var
-    setTimeout = global.setTimeout,
-    setInterval = global.setInterval,
-    clearInterval = global.clearInterval,
-    clearTimeout = global.clearTimeout
-;
+// condition to avoid problems with jsc
+if (typeof global != "undefined") {
 
-setTimeout || (function (timer, ids, slice, counter) {
-    
-    // did you know?
-    //  all browsers but IE accept one or more arguments
-    //  to pass to the callbacl after the timer/delay number
-    //  ... so does Rhino now!
-    
-    setInterval = global.setInterval = function setInterval(fn, delay) {
-        return schedule(fn, delay, slice.call(arguments, 2), 1);
-    };
-    
-    setTimeout = global.setTimeout = function setTimeout(fn, delay) {
-        return schedule(fn, delay, slice.call(arguments, 2));
-    };
-    
-    clearInterval = global.clearInterval =
-    clearTimeout = global.clearTimeout = function clearInterval(id) {
-        ids[id].cancel();
-        timer.purge();
-        delete ids[id];
-    };
-    
-    function schedule(fn, delay, args, interval) {
-        var id = ++counter;
-        ids[id] = new JavaAdapter(java.util.TimerTask,{run: function () {
-            fn.apply(null, args);
-        }});
-        interval ?
-            timer.schedule(ids[id], delay, delay)
-            :
-            timer.schedule(ids[id], delay)
-        ;
-        return id;
-    }
-    
-})(new java.util.Timer(), {}, [].slice, 0);/*!
-(C) Andrea Giammarchi, @WebReflection - Mit Style License
-*/
-/**@license (C) Andrea Giammarchi, @WebReflection - Mit Style License
-*/
+    var
+        setTimeout = global.setTimeout,
+        setInterval = global.setInterval,
+        clearInterval = global.clearInterval,
+        clearTimeout = global.clearTimeout
+    ;
+
+    setTimeout || (function (timer, ids, slice, counter) {
+
+        // did you know?
+        //  all browsers but IE accept one or more arguments
+        //  to pass to the callbacl after the timer/delay number
+        //  ... so does Rhino now!
+
+        setInterval = global.setInterval = function setInterval(fn, delay) {
+            return schedule(fn, delay, slice.call(arguments, 2), 1);
+        };
+
+        setTimeout = global.setTimeout = function setTimeout(fn, delay) {
+            return schedule(fn, delay, slice.call(arguments, 2));
+        };
+
+        clearInterval = global.clearInterval =
+        clearTimeout = global.clearTimeout = function clearInterval(id) {
+            ids[id].cancel();
+            timer.purge();
+            delete ids[id];
+        };
+
+        function schedule(fn, delay, args, interval) {
+            var id = ++counter;
+            ids[id] = new JavaAdapter(java.util.TimerTask,{run: function () {
+                fn.apply(null, args);
+            }});
+            interval ?
+                timer.schedule(ids[id], delay, delay)
+                :
+                timer.schedule(ids[id], delay)
+            ;
+            return id;
+        }
+
+    })(new java.util.Timer(), {}, [].slice, 0);
+
+} else { // jsc specific hack
+    !function (global, i, cbs, slice) {
+        function setTimeout(cb, delay) {
+            var t = new Date;
+            while (new Date - t < delay);
+            cb.apply(null, slice.call(arguments, 2));
+        }
+        slice = cbs.slice;
+        global.setTimeout = global.setInterval = setTimeout;
+        global.clearInterval = global.clearTimeout = function () {};
+    }(this, 0, []);
+}
+
 var wru = function (window) {"use strict";
     
     /**
@@ -75,11 +93,7 @@ var wru = function (window) {"use strict";
      * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
      * THE SOFTWARE.
      */
-    /*!
-(C) Andrea Giammarchi, @WebReflection - Mit Style License
-*/
-/**@license (C) Andrea Giammarchi, @WebReflection - Mit Style License
-*/
+    
     // console specific version
     function isGonnaBeLegen() {
         current = shift.call(queue);
@@ -122,8 +136,13 @@ var wru = function (window) {"use strict";
                     // print uses println ... while we need print without \n
                     java.lang.System.out.print(info);
                 } catch(up) {
-                    // phantomjs or default fallback
-                    console.log(info);
+                    try {
+                        // phantomjs or default fallback
+                        console.log(info);
+                    } catch(up) {
+                        // jsc and others
+                        print(info);
+                    }
                 }
             }
         }
@@ -178,11 +197,7 @@ var wru = function (window) {"use strict";
         prefix = EMPTY;
         isGonnaBeLegen();
     }
-    /*!
-(C) Andrea Giammarchi, @WebReflection - Mit Style License
-*/
-/**@license (C) Andrea Giammarchi, @WebReflection - Mit Style License
-*/
+    
     // common functions for all versions
     function giveItATry(name) {
         if (iHasIt(current, name)) {
@@ -209,11 +224,7 @@ var wru = function (window) {"use strict";
         }
         giveItATry("teardown");
     }
-    /*!
-(C) Andrea Giammarchi, @WebReflection - Mit Style License
-*/
-/**@license (C) Andrea Giammarchi, @WebReflection - Mit Style License
-*/
+    
     
     var // wru library core
         wru = {
@@ -351,11 +362,7 @@ var wru = function (window) {"use strict";
                 waitForIt || isGonnaBeLegen();
             }
         },
-        /*!
-(C) Andrea Giammarchi, @WebReflection - Mit Style License
-*/
-/**@license (C) Andrea Giammarchi, @WebReflection - Mit Style License
-*/
+        
         // common private variables / constants / shortcuts
         TRUE = true,
         FALSE = !TRUE,
@@ -384,31 +391,19 @@ var wru = function (window) {"use strict";
         overallFail = 0,
         overallFatal = 0,
         daryTimeout = 0,
-        /*!
-(C) Andrea Giammarchi, @WebReflection - Mit Style License
-*/
-/**@license (C) Andrea Giammarchi, @WebReflection - Mit Style License
-*/
+        
         
         // these variables are used on console version only
         ERROR = "\033[1;31mERROR\033[0m",
         FAILURE = "\033[0;31mFAILURE\033[0m",
         OK = "\033[0;32mOK\033[0m",
-        OUTPUT_SEPARATOR = "------------------------------",/*!
-(C) Andrea Giammarchi, @WebReflection - Mit Style License
-*/
-/**@license (C) Andrea Giammarchi, @WebReflection - Mit Style License
-*/
+        OUTPUT_SEPARATOR = "------------------------------",
         
         // shared across the whole private scope
         Math, abs, random, setTimeout, clearTimeout,
         current, node, pass, fail, fatal, tmp, called
     ;
-    /*!
-(C) Andrea Giammarchi, @WebReflection - Mit Style License
-*/
-/**@license (C) Andrea Giammarchi, @WebReflection - Mit Style License
-*/
+    
 
     wru.log = function (obj, printOnly) {
         try {
@@ -420,13 +415,9 @@ var wru = function (window) {"use strict";
             log(obj, 0);
         }
     };
-/*!
-(C) Andrea Giammarchi, @WebReflection - Mit Style License
-*/
-/**@license (C) Andrea Giammarchi, @WebReflection - Mit Style License
-*/
+
     // node.js exports
-    if (typeof global != "function") {
+    if (typeof __dirname != "undefined") {
 
         window.wru = wru;
         window.assert = wru.assert;
@@ -438,11 +429,7 @@ var wru = function (window) {"use strict";
         // re-assign window to make it global
         window = global;
     }
-    /*!
-(C) Andrea Giammarchi, @WebReflection - Mit Style License
-*/
-/**@license (C) Andrea Giammarchi, @WebReflection - Mit Style License
-*/
+    
     // these are window/global object dependent
     // must be eventually defined after wru.export.js, if used
     Math = window.Math;
@@ -450,31 +437,19 @@ var wru = function (window) {"use strict";
     random = Math.random;
     setTimeout = window.setTimeout;
     clearTimeout = window.clearTimeout;
-        /*!
-(C) Andrea Giammarchi, @WebReflection - Mit Style License
-*/
-/**@license (C) Andrea Giammarchi, @WebReflection - Mit Style License
-*/
+        
     // "THE CURSOR" http://3site.eu/cursor
     window.setInterval(function () {
         waitForIt && log(EMPTY + charAt.call(cursor, ci++%4) + "\b\b", true);
     }, TIMEOUT);
-    /*!
-(C) Andrea Giammarchi, @WebReflection - Mit Style License
-*/
-/**@license (C) Andrea Giammarchi, @WebReflection - Mit Style License
-*/
+    
     
     //^ this is useful to test internals on non minified version
     wru.debug = function (O_o) {
         return eval("(" + O_o + ")");
     };
     //$ and this block is removed at build time
-    /*!
-(C) Andrea Giammarchi, @WebReflection - Mit Style License
-*/
-/**@license (C) Andrea Giammarchi, @WebReflection - Mit Style License
-*/
+    
     
     TIMEOUT *= TIMEOUT; // by default, timeout is 10000 (10 seconds)
                         // this is the place you can set it, e.g.

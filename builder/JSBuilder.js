@@ -99,7 +99,7 @@ function compile(copyright, fullName, minName, files, search, replace) {
   for (i = 0; i < files.length; ++i) {
     files[i] = read('../' + 'src/' + files[i]);
   }
-  content = files.join(multiCopyright + "\n");
+  content = multiCopyright + "\n" + files.join("\n");
   files = [];
   search && (content = replace(content, search, replace));
   cleanContent = content.replace(/\/\/\^[^\0]*?\/\/\$[^\n\r]+/);

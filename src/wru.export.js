@@ -1,5 +1,5 @@
     // node.js exports
-    if (typeof global != "function") {
+    if (typeof __dirname != "undefined") {
 
         window.wru = wru;
         window.assert = wru.assert;

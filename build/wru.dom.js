@@ -1,3 +1,8 @@
+/*!
+(C) Andrea Giammarchi, @WebReflection - Mit Style License
+*/
+/**@license (C) Andrea Giammarchi, @WebReflection - Mit Style License
+*/
 var wru = function (window) {"use strict";
     
     /**
@@ -21,11 +26,7 @@ var wru = function (window) {"use strict";
      * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
      * THE SOFTWARE.
      */
-    /*!
-(C) Andrea Giammarchi, @WebReflection - Mit Style License
-*/
-/**@license (C) Andrea Giammarchi, @WebReflection - Mit Style License
-*/
+    
     // DOM specific version
     function isGonnaBeLegen() {
         current = shift.call(queue);
@@ -130,11 +131,7 @@ var wru = function (window) {"use strict";
         prefix = EMPTY;
         isGonnaBeLegen();
     }
-    /*!
-(C) Andrea Giammarchi, @WebReflection - Mit Style License
-*/
-/**@license (C) Andrea Giammarchi, @WebReflection - Mit Style License
-*/
+    
     // common functions for all versions
     function giveItATry(name) {
         if (iHasIt(current, name)) {
@@ -161,11 +158,7 @@ var wru = function (window) {"use strict";
         }
         giveItATry("teardown");
     }
-    /*!
-(C) Andrea Giammarchi, @WebReflection - Mit Style License
-*/
-/**@license (C) Andrea Giammarchi, @WebReflection - Mit Style License
-*/
+    
     
     var // wru library core
         wru = {
@@ -303,11 +296,7 @@ var wru = function (window) {"use strict";
                 waitForIt || isGonnaBeLegen();
             }
         },
-        /*!
-(C) Andrea Giammarchi, @WebReflection - Mit Style License
-*/
-/**@license (C) Andrea Giammarchi, @WebReflection - Mit Style License
-*/
+        
         // common private variables / constants / shortcuts
         TRUE = true,
         FALSE = !TRUE,
@@ -336,31 +325,19 @@ var wru = function (window) {"use strict";
         overallFail = 0,
         overallFatal = 0,
         daryTimeout = 0,
-        /*!
-(C) Andrea Giammarchi, @WebReflection - Mit Style License
-*/
-/**@license (C) Andrea Giammarchi, @WebReflection - Mit Style License
-*/
+        
         
         // these variables are used on DOM version only
         INNERHTML = "innerHTML",
         document = window.document,
         createElement = document.createElement,
-        /*!
-(C) Andrea Giammarchi, @WebReflection - Mit Style License
-*/
-/**@license (C) Andrea Giammarchi, @WebReflection - Mit Style License
-*/
+        
         
         // shared across the whole private scope
         Math, abs, random, setTimeout, clearTimeout,
         current, node, pass, fail, fatal, tmp, called
     ;
-    /*!
-(C) Andrea Giammarchi, @WebReflection - Mit Style License
-*/
-/**@license (C) Andrea Giammarchi, @WebReflection - Mit Style License
-*/
+    
     // these are window/global object dependent
     // must be eventually defined after wru.export.js, if used
     Math = window.Math;
@@ -368,11 +345,7 @@ var wru = function (window) {"use strict";
     random = Math.random;
     setTimeout = window.setTimeout;
     clearTimeout = window.clearTimeout;
-        /*!
-(C) Andrea Giammarchi, @WebReflection - Mit Style License
-*/
-/**@license (C) Andrea Giammarchi, @WebReflection - Mit Style License
-*/
+        
     
     // the default node to use for tests
     // feel free to specify another one
@@ -382,31 +355,19 @@ var wru = function (window) {"use strict";
         document.body ||
         document.documentElement
     );
-    /*!
-(C) Andrea Giammarchi, @WebReflection - Mit Style License
-*/
-/**@license (C) Andrea Giammarchi, @WebReflection - Mit Style License
-*/
+    
     // "THE CURSOR" http://3site.eu/cursor
     window.setInterval(function () {
         waitForIt && passTheInfo(charAt.call(cursor, ci++%4));
     }, TIMEOUT);
-    /*!
-(C) Andrea Giammarchi, @WebReflection - Mit Style License
-*/
-/**@license (C) Andrea Giammarchi, @WebReflection - Mit Style License
-*/
+    
     
     //^ this is useful to test internals on non minified version
     wru.debug = function (O_o) {
         return eval("(" + O_o + ")");
     };
     //$ and this block is removed at build time
-    /*!
-(C) Andrea Giammarchi, @WebReflection - Mit Style License
-*/
-/**@license (C) Andrea Giammarchi, @WebReflection - Mit Style License
-*/
+    
 
     wru.log = function log(obj, alertOnly) {
         alertOnly ?
@@ -414,11 +375,7 @@ var wru = function (window) {"use strict";
             (typeof console != "undefined") && console.log(obj)
         ;
     };
-/*!
-(C) Andrea Giammarchi, @WebReflection - Mit Style License
-*/
-/**@license (C) Andrea Giammarchi, @WebReflection - Mit Style License
-*/
+
     
     TIMEOUT *= TIMEOUT; // by default, timeout is 10000 (10 seconds)
                         // this is the place you can set it, e.g.

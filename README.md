@@ -7,12 +7,12 @@ wru :: JavaScript tests have never been that easy
 features
 --------
 
-  * **runs in both client and server environments**, compatible with html files, node.js, Rhino, and PhantomJS
+  * **runs in both client and server environments**, compatible with html files, node.js, Rhino, PhantomJS, and JavaScriptCore.
   * **both synchronous and asynchronous tests** in an absolutely intuitive way
   * **ES5 and JS.next ready**, compatible with `"use strict"` directive which means no `with` statements, `eval`, or misused `this` references
   * **easy**, probably the easiest way to test JS code out there thanks to its simplified API: `test`, `assert`, `async`, and `log` ... you already remember "*all of them*", isn't it?
   * **unobtrusive** and **self defensive**, since everything that could possibly change in such dynamic environment as JS is, is "*sandboxed*" inside the *wru closure*. This means no matter how "*nasty*" your code is, *wru* won't pollute or change the global environment, neither it will rely in native *constructor.prototypes* changes (`Array.prototype.push = ...` or `Object.prototype.hasOwnProperty = ...`? not a problem!)
-  * **cursor included in both web and console** ... you gonna realize how much "[THE CURSOR](http://www.3site.eu/cursor/)" is important, specially to understand if your test is **stuck** or simply "*waiting for*" ... cursor is working in both Unix and OSX consoles (unfortunately PhantomJS does not support the cursor)
+  * **cursor included in both web and console** ... you gonna realize how much "[THE CURSOR](http://www.3site.eu/cursor/)" is important, specially to understand if your test is **stuck** or simply "*waiting for*" ... cursor is working in both Unix and OSX consoles (unfortunately PhantomJS does not support the cursor while jsc does not support timers at all)
   * **tiny**, even if it's not important in tests world, *wru* fits into about 2Kb (1.2Kb *minzpped*) which means not much to fix or change here, just a simple, reliable, and essential framework for your tests
   * **under your control**, since there is absolutely **no magic behind the *wru* scene**. You assert what you want, you async what you need, you describe what's needed, and you are *ready to go* in less than 5 minutes
 
@@ -24,13 +24,13 @@ compatibility
 
 *wru* is compatible with basically all possible browsers out there included **IE5.5**, **IE6**, **IE7**, **IE8**, **IE9**, **IE10**, **Chrome**, **Firefox**, **Safari**, **Webkit** based, **Mobile Browsers**, and **Opera**.
 
-On server side *wru* is compatible with latest **node.js**, **Rhino** and **PhantomJS** versions. I swear if *I find an easy way to* easily *test Spider/Iron/JagerMonkey I will support them* too.
+On server side *wru* is compatible with latest **node.js**, **Rhino**, **PhantomJS**, and **JavaScriptCore** versions. I swear if *I find an easy way to* easily *test Spider/Iron/JagerMonkey I will support them* too.
 
 
 how to test wru
 ---------------
 
-The simplest way to test wru is to use [template.html](https://raw.github.com/WebReflection/wru/master/build/template.html) for **web** tests or [template.js](https://raw.github.com/WebReflection/wru/master/build/template.js) for **node** and **rhino** tests or [template.phantom.js](https://github.com/WebReflection/wru/blob/master/build/template.phantom.js) for **PhantomJS** tests.
+The simplest way to test wru is to use [template.html](https://raw.github.com/WebReflection/wru/master/build/template.html) for **web** tests or [template.js](https://raw.github.com/WebReflection/wru/master/build/template.js) for **node**, **rhino**, and **jsc** tests or [template.phantom.js](https://github.com/WebReflection/wru/blob/master/build/template.phantom.js) for **PhantomJS** tests.
 
 With these 3 options you don't even need to fork or download the entire repository ... but if you do that ...
 
@@ -45,6 +45,9 @@ From *wru* root directory, simply run these commands accordingly with what you w
     // PhantomJS test
     phantomjs test/phantom.js
     
+    // JavaScriptCore test
+    jsc test/test.js
+    
     // web (through Mac OSX but you can open test.html with any browser)
     open test/test.html
 
@@ -58,6 +61,8 @@ From *wru* root directory, simply run these commands accordingly with what you w
 
 **PhantomJS** tests should always starts when the DOM has been already parsed.
 
+**JavaScriptCore** does not implement (yet) setTimeout and setInterval so it's not possible to test via `async()` calls.
+
 If you forked the project, you made some change, and you want to **rebuild wru**, this is all you have to do:
 
     // still inside wru folder
@@ -68,7 +73,7 @@ If you forked the project, you made some change, and you want to **rebuild wru**
 
 After the build process is finished, no more than 3 seconds with forced waiting time included to read stats if build has been *double-clicked*, you should be able to run again the test for your own environment.
 
-Please bear in mind **JSbuilder.py** works with **node-js 0.6+** or **Python < 3** (2.6 or 2.7 are fine) so be sure you have it (you should by default on Mac or Linux).
+Please bear in mind **JSbuilder.(js|py)** works with **node-js 0.4+** or **Python < 3** (2.6 or 2.7 are fine) so be sure you have it (you should by default on Mac or Linux).
 
 
 wru basics

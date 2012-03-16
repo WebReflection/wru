@@ -40,8 +40,13 @@
                     // print uses println ... while we need print without \n
                     java.lang.System.out.print(info);
                 } catch(up) {
-                    // phantomjs or default fallback
-                    console.log(info);
+                    try {
+                        // phantomjs or default fallback
+                        console.log(info);
+                    } catch(up) {
+                        // jsc and others
+                        print(info);
+                    }
                 }
             }
         }
