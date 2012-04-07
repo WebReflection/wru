@@ -394,9 +394,9 @@ var wru = function (window) {"use strict";
         
         
         // these variables are used on console version only
-        ERROR = "\033[1;31mERROR\033[0m",
-        FAILURE = "\033[0;31mFAILURE\033[0m",
-        OK = "\033[0;32mOK\033[0m",
+        ERROR = "\x1B[1;31mERROR\x1B[0m",
+        FAILURE = "\x1B[0;31mFAILURE\x1B[0m",
+        OK = "\x1B[0;32mOK\x1B[0m",
         OUTPUT_SEPARATOR = "------------------------------",
         
         // shared across the whole private scope
