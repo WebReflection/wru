@@ -26,7 +26,7 @@
             showSummary();
         }
     }
-    
+
     function create(nodeName) {
         try {
             return createElement.call(document, nodeName);
@@ -35,15 +35,15 @@
             return document.createElement(nodeName);
         }
     }
-    
+
     function putItThereAndGimmeBack(node, nodeName) {
         return node.appendChild(create(nodeName));
     }
-    
+
     function passTheInfo(info) {
         node[INNERHTML] = slice.call(node[INNERHTML], 0, -2) + EMPTY + info;
     }
-    
+
     function showSummary() {
         var
             node = wru.node.insertBefore(
@@ -51,32 +51,34 @@
                 wru.node.firstChild
             ),
             innerHTML,
-            className
+            className,
+            status
         ;
         if (overallFatal) {
-            className = "error";
+            status = className = "error";
             innerHTML = "There Are Errors: " + overallFatal;
         } else if(overallFail) {
-            className = "fail";
+            status = className = "fail";
             innerHTML = overallFail + " Tests Failed";
         } else {
-            className = "pass";
+            status = className = "pass";
             innerHTML = "Passed " + overallPass + " Tests";
         }
+        wru.status = status;
         node[INNERHTML] = "<strong>" + innerHTML + "</strong>";
         node.className = className;
     }
-    
+
     function showTheProblem() {
         var style = this.lastChild.style;
         style.display = style.display == "none" ? "block" : "none";
     }
-    
+
     function writeItOrdered(fail) {
         node[INNERHTML] += "<ul>" + LISTART + join.call(fail, LIEND + LISTART) + LIEND + "</ul>";
         (node.onclick = showTheProblem).call(node);
     }
-    
+
     function Dary() {
         clearDaryTimeou();
         overallPass += pass[LENGTH];
@@ -102,4 +104,3 @@
         prefix = EMPTY;
         isGonnaBeLegen();
     }
-    

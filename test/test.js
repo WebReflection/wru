@@ -6,12 +6,15 @@
         // node, rhino, and web
         try {
             // node and phantom js
-            var wru = this.wru || require("./../build/wru.console");
+            var wru = this.wru.assert ?
+              this.wru :
+              require("./../build/wru.console")
+            ;
         } catch(wru) {
             // rhino
             try {
                 load(
-                    new java.io.File(".").getCanonicalPath() + 
+                    new java.io.File(".").getCanonicalPath() +
                     "/build/wru.console.js"
                 );
             } catch(wru) {
@@ -78,4 +81,3 @@
                 wru.assert(executed);
             }
         }]);
-        
