@@ -3,7 +3,8 @@
 var
   CWD = process.cwd(),
   path = require('path'),
-  wru = require(path.join(CWD, 'node', 'wru.console.js')),
+  args = resolveArguments(process.argv),
+  wru = require(path.join(__dirname, 'wru.console.js')),
   test = [],
   wru_test = wru.test,
   interval = 0
@@ -26,6 +27,14 @@ global.test = wru.test = function () {
   interval = setTimeout(execute, 10);
 };
 global.log = wru.log;
-resolveArguments(process.argv).forEach(function (fileName) {
-  require(path.join(CWD, fileName));
-});
+if (args.length) {
+  args.forEach(function (fileName) {
+    require(path.join(CWD, fileName));
+  });
+} else {
+  console.log('');
+  console.log('Usage:');
+  console.log('wru ~/path/with/test.js ~/more?if/necessary.js');
+  console.log('');
+  process.exit();
+}
