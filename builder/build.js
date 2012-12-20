@@ -151,5 +151,8 @@ JSBuilder.queue([
   function () {
     require('child_process').exec('cp build/wru.console.js node/wru.console.js', JSBuilder.next);
   },
+  function () {
+    require('child_process').exec('cp src/program.js node/program.js', JSBuilder.next);
+  },
   "done"
 ]);

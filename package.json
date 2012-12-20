@@ -1,14 +1,20 @@
 {
     "name": "wru"
-  , "version": "0.1.8"
+  , "version": "0.1.9"
   , "description": "sync and async JavaScript tests have never been that easy"
   , "homepage": "https://github.com/WebReflection/wru"
   , "keywords": ["test", "general", "purpose", "async", "sync", "asynchronous", "phantom", "rhino", "browser"]
-  , "author": "Andrea Giammarchi"
+  , "author": {
+      "name": "Andrea Giammarchi",
+      "web": "http://webreflection.blogspot.com/"
+    }
   , "repository":{
         "type": "git"
       , "url": "https://github.com/WebReflection/wru.git"
     }
   , "main": "./node/wru.console.js"
   , "engines": { "node": ">= 0.4.0" }
+  , "bin": {
+      "wru": "./node/program.js"
+    }
 }
