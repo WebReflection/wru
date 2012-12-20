@@ -1,8 +1,9 @@
-console.assert(true, 'OK');
 test([{
   name: "base 1",
   test: function () {
-    assert("OK");
+    setTimeout(async(function () {
+      assert("OK");
+    }));
   }
 }]);
 wru.test([{
