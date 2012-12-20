@@ -1,3 +1,4 @@
+console.assert(true, 'OK');
 test([{
   name: "base 1",
   test: function () {

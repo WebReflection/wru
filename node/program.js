@@ -5,11 +5,21 @@ var
   path = require('path'),
   args = resolveArguments(process.argv),
   wru = require(path.join(__dirname, 'wru.console.js')),
-  test = [],
+  inline = [],
+  test = [consoleAssert],
   wru_test = wru.test,
   interval = 0
 ;
+function consoleAssert() {
+  inline.forEach(function (args) {
+    args.length < 2 ?
+      wru.assert(args[0]) :
+      wru.assert(args[1], args[0])
+    ;
+  });
+}
 function execute() {
+  inline.length || test.shift();
   wru_test.call(wru, test);
 }
 function resolveArguments(args, keepProgramName) {
@@ -27,6 +37,11 @@ global.test = wru.test = function () {
   interval = setTimeout(execute, 10);
 };
 global.log = wru.log;
+/* maybe too obtrusive ...
+global.console.assert = function assert() {
+  inline.push(arguments);
+};
+*/
 if (args.length) {
   args.forEach(function (fileName) {
     require(path.join(CWD, fileName));
