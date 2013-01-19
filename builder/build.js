@@ -105,6 +105,27 @@ JSBuilder.queue([
   },
   function () {
     JSBuilder.write(
+        '../build/test.html',
+        JSBuilder.replace(
+            JSBuilder.read('../src/test.html'),
+            [
+                '{{CSS}}',
+                '{{JS}}',
+                'var wru=',
+                '}(this);'
+            ],
+            [
+                JSBuilder.read('../src/template.css'),
+                JSBuilder.read('../build/wru.min.js'),
+                'wru(',
+                '}(this));'
+            ]
+        )
+    );
+    JSBuilder.next();
+  },
+  function () {
+    JSBuilder.write(
         '../build/template.js',
         JSBuilder.replace(
             JSBuilder.read('../src/template.js'),
