@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <title>Wru by WebReflection</title>
+  </head>
+
+  <body>
+    <header>
+      <div class="inner">
+        <h1>Wru</h1>
+        <h2>essential unit test framework</h2>
+        <a href="https://github.com/WebReflection/wru" class="button"><small>View project on</small>GitHub</a>
+      </div>
+    </header>
+
+    <div id="content-wrapper">
+      <div class="inner clearfix">
+        <section id="main-content">
+          <h1>wru :: JavaScript tests have never been that easy</h1>
+
+<p><em>wru</em> is an <strong>essential general purpose test framework</strong> compatible with <strong>web</strong> environment, <a href="http://nodejs.org/">node.js</a>, <a href="http://www.mozilla.org/rhino/">Rhino</a>, and now <a href="http://www.phantomjs.org/">PhantomJS</a> too.</p>
+
+<h2>features</h2>
+
+<ul>
+<li>
+<strong>runs in both client and server environments</strong>, compatible with html files, node.js, Rhino, PhantomJS, and JavaScriptCore.</li>
+<li>
+<strong>both synchronous and asynchronous tests</strong> in an absolutely intuitive way</li>
+<li>
+<strong>ES5 and JS.next ready</strong>, compatible with <code>"use strict"</code> directive which means no <code>with</code> statements, <code>eval</code>, or misused <code>this</code> references</li>
+<li>
+<strong>easy</strong>, probably the easiest way to test JS code out there thanks to its simplified API: <code>test</code>, <code>assert</code>, <code>async</code>, and <code>log</code> ... you already remember "*all of them*", isn't it?</li>
+<li>
+<strong>unobtrusive</strong> and <strong>self defensive</strong>, since everything that could possibly change in such dynamic environment as JS is, is "*sandboxed*" inside the <em>wru closure</em>. This means no matter how "*nasty*" your code is, <em>wru</em> won't pollute or change the global environment, neither it will rely in native <em>constructor.prototypes</em> changes (<code>Array.prototype.push = ...</code> or <code>Object.prototype.hasOwnProperty = ...</code>? not a problem!)</li>
+<li>
+<strong>cursor included in both web and console</strong> ... you gonna realize how much "<a href="http://www.3site.eu/cursor/">THE CURSOR</a>" is important, specially to understand if your test is <strong>stuck</strong> or simply "*waiting for*" ... cursor is working in both Unix and OSX consoles (unfortunately PhantomJS does not support the cursor while jsc does not support timers at all)</li>
+<li>
+<strong>tiny</strong>, even if it's not important in tests world, <em>wru</em> fits into about 2Kb (1.2Kb <em>minzpped</em>) which means not much to fix or change here, just a simple, reliable, and essential framework for your tests</li>
+<li>
+<strong>under your control</strong>, since there is absolutely <strong>no magic behind the <em>wru</em> scene</strong>. You assert what you want, you async what you need, you describe what's needed, and you are <em>ready to go</em> in less than 5 minutes</li>
+</ul><p>If you can't believe it check <a href="https://github.com/WebReflection/wru/blob/master/test/test.html">html</a>, <a href="https://github.com/WebReflection/wru/blob/master/test/testnode.js">node.js</a>, <a href="https://github.com/WebReflection/wru/blob/master/test/testrhino.js">Rhino</a>, or <a href="https://github.com/WebReflection/wru/blob/master/test/phantom.js">PhantomJS</a> test and see how <em>wru</em> does work ;-)</p>
+
+<h2>compatibility</h2>
+
+<p><em>wru</em> is compatible with basically all possible browsers out there included <strong>IE5.5</strong>, <strong>IE6</strong>, <strong>IE7</strong>, <strong>IE8</strong>, <strong>IE9</strong>, <strong>IE10</strong>, <strong>Chrome</strong>, <strong>Firefox</strong>, <strong>Safari</strong>, <strong>Webkit</strong> based, <strong>Mobile Browsers</strong>, and <strong>Opera</strong>.</p>
+
+<p>On server side <em>wru</em> is compatible with latest <strong>node.js</strong>, <strong>Rhino</strong>, <strong>PhantomJS</strong>, and <strong>JavaScriptCore</strong> versions. I swear if <em>I find an easy way to</em> easily <em>test Spider/Iron/JagerMonkey I will support them</em> too.</p>
+
+<h2>how to test wru</h2>
+
+<p>The simplest way to test wru is to use <a href="https://raw.github.com/WebReflection/wru/master/build/template.html">template.html</a> for <strong>web</strong> tests or <a href="https://raw.github.com/WebReflection/wru/master/build/template.js">template.js</a> for <strong>node</strong>, <strong>rhino</strong>, and <strong>jsc</strong> tests or <a href="https://github.com/WebReflection/wru/blob/master/build/template.phantom.js">template.phantom.js</a> for <strong>PhantomJS</strong> tests.</p>
+
+<p>With these 3 options you don't even need to fork or download the entire repository ... but if you do that ...</p>
+
+<p>From <em>wru</em> root directory, simply run these commands accordingly with what you want to test:</p>
+
+<pre><code>// node.js test
+node test/test.js
+
+// Rhino
+java -jar builder/jar/js.jar test/test.js
+
+// PhantomJS test
+phantomjs test/phantom.js
+
+// JavaScriptCore test
+jsc test/test.js
+
+// web (through Mac OSX but you can open test.html with any browser)
+open test/test.html
+</code></pre>
+
+<p><strong>PhantomJS</strong> supports tests for both plain JavaScript in a blank page, or any url adding it as argument.</p>
+
+<pre><code>// PhantomJS test on about:blank
+phantomjs build/template.phantom.js
+
+// PhantomJS test on any url
+phantomjs build/template.phantom.js "http://yourwebsite.com"
+</code></pre>
+
+<p><strong>PhantomJS</strong> tests should always starts when the DOM has been already parsed.</p>
+
+<p><strong>JavaScriptCore</strong> does not implement (yet) setTimeout and setInterval so it's not possible to test via <code>async()</code> calls.</p>
+
+<p>If you forked the project, you made some change, and you want to <strong>rebuild wru</strong>, this is all you have to do:</p>
+
+<pre><code>// still inside wru folder
+python builder/build.py
+
+// or now with node
+node builder/build.js
+</code></pre>
+
+<p>After the build process is finished, no more than 3 seconds with forced waiting time included to read stats if build has been <em>double-clicked</em>, you should be able to run again the test for your own environment.</p>
+
+<p>Please bear in mind <strong>JSbuilder.(js|py)</strong> works with <strong>node-js 0.4+</strong> or <strong>Python &lt; 3</strong> (2.6 or 2.7 are fine) so be sure you have it (you should by default on Mac or Linux).</p>
+
+<h2>wru basics</h2>
+
+<pre><code>// probably all you need as "one shot" test
+wru.test({
+    name: "Hello wru!",
+    test: function () {
+        wru.assert("it works!", 1);
+    }
+});
+
+// for multiple tests ... pass an Array
+wru.test([{
+    name: "test #1",
+    setup: function () {
+        // setup before the test
+    },
+    test: function () {
+        // async test example
+        setTimeout(wru.async(function () {
+            wru.assert("executed", true);
+        }), 1000);
+    },
+    teardown: function () {
+        // clean up after the test
+    }
+},{
+    name: "test #2",
+    test: function () {
+        // do other stuf here
+    }
+}]);
+</code></pre>
+
+<p>To know more about <em>wru</em> possibilities ... please keep reading ;-)</p>
+
+<h1>wru API</h1>
+
+<p>There are truly few things you need to know, and even less properties you need to configure!</p>
+
+<h2>methods</h2>
+
+<ul>
+<li>
+<code>test(object)</code> or <code>test([object, ..., object])</code> to execute one or more tests. A generic test object may have one or more properties:
+
+<ul>
+<li>
+<code>test</code> property, as <strong>function</strong>, to execute the test with one or more <code>wru.assert()</code> or <code>wru.async()</code> calls. <strong>optional</strong> but recommended</li>
+<li>
+<code>name</code> or <code>description</code> property, as <strong>string</strong>, to have visual knowledge of the current test <strong>optional</strong>
+</li>
+<li>
+<code>setup</code> property, as <strong>function</strong>, that will be executed right before the test: <strong>optional</strong>
+</li>
+<li>
+<code>teardown</code> property, as <strong>function</strong>, that will be executed right after the test: <strong>optopnal</strong>
+</li>
+</ul>
+</li>
+<li>
+<code>assert("description", truishOrFalsyValue)</code> to manually assert whatever you want where <strong>description is optional</strong> (but suggested) and the assertion is compatible with <em>truish</em> or <em>falsy</em> values. You are in charge of strictly compared results if necessary by <em>===</em> operator, nothing new to learn here</li>
+<li>
+<code>async("description", callback, timeout)</code> to tell <em>wru</em> that a test will be executed at some point later and where <strong>both description and timeout are optionals</strong>
+</li>
+<li>
+<code>log(anything, forceFallback)</code> the equivalent of <em>console.log(obj)</em> where supported, the equivalent of <em>alert()</em> or <em>print()</em> if the <em>forceFallback</em> flag is set to true (or better, <em>truish</em>)</li>
+</ul><h2>properties</h2>
+
+<ul>
+<li>
+<code>random</code>, as <code>true</code> or <code>false</code>, to make tests order execution random (by default <code>false</code>)</li>
+<li>
+<code>node</code> on <strong>web version only</strong> to set a different node from the default one (which is an element with <code>id == "wru"</code>or the <code>document.body</code> or the <code>document.documentElement</code> if <code>body</code> is not present yet)</li>
+</ul><h2>test properties</h2>
+
+<p>Each test can be either an object or, if you are that lazy typer, a function.</p>
+
+<ul>
+<li>
+<code>name</code> as test <em>title</em> or <em>test name</em>, if the test is a function the function name (expression or declared) will be used where available, anonymous otherwise.</li>
+<li>
+<code>setup</code> as function to do something before the test is executed. Bear in mind every test will receive a freshly baked object as argument, from setup, to test, and teardown, the same object. Use it if you need.</li>
+<li>
+<code>test</code> as function to execute if the test is not a function itself. Receives the shared object per test as first argument.</li>
+<li>
+<code>teardown</code> as function to do something after the test is executed. Receives the same shared object setup and test receive as argument.</li>
+</ul><h1>how does wru work</h1>
+
+<p>following a list of explained tasks that are possible with <em>wru</em></p>
+
+<h2>synchronous tests and wru.assert()</h2>
+
+<p>Every test <strong>may</strong> have one or more <code>wru.assert()</code> calls inside. The method itself accepts one or two arguments. Following a sequence of valid operations.</p>
+
+<pre><code>// the test object ...
+{
+    name: "existance test",
+    test: function () {
+
+        // example only: if next property is not
+        // null, undefined, 0, false, "", or NaN
+        // the assertion will pass the test
+        wru.assert("callback exists", window.onload);
+
+        // if necessary, assertion can be strict without problems
+        wru.assert(
+            "it is a callback",
+            typeof window.onload === "function"
+        );
+
+        // the description is visually useful
+        // if the test fails but it's not mandatory
+        // next example is still valid, no description
+        wru.assert("isArray" in Array);
+
+        // if a condition supposes to be truish
+        // wru.assert can make test life easier
+        // returning the asserted value
+        if (wru.assert("defineProperty" in Object)) {
+            wru.assert(
+                Object.defineProperty({}, "_", {value: true})._
+            );
+        }
+
+    }
+}
+</code></pre>
+
+<h2>asynchronous tests and wru.async()</h2>
+
+<p>Every test is performed synchronously unless there is one or more <code>wru.async()</code> calls. In latter case all tests after the current one will be waiting for the asynchronous call to be executed.
+When it happens, if the asynchronous call performed one or more assertions, the framework keep going without requiring any extra step: <strong>is that easy!</strong></p>
+
+<pre><code>// the test object ...
+{
+    name: "load content",
+    test: function () {
+        // asynchronous test example
+
+        // this will be synchronous
+        wru.assert("condition accepted", true);
+
+        // this will be asynchronous
+        var xhr = new XMLHttpRequest;
+        xhr.open("get", "file.txt", true);
+        xhr.onreadystatechange = wru.async(function () {
+            if (this.readyState === 4) {
+
+                // only on readyState 4 there is an assertion
+                wru.assert("text is not empty", this.responseText.length);
+
+                // if necessary, async call can be nested
+                setTimeout(wru.async(function () {
+                    wru.assert(
+                        "DOM changed in the meanwhile",
+                        docment.body.innerHTML != storedLayout
+                    );
+                }, 500));
+            }
+        });
+        xhr.send(null);
+
+        // this will be performed regardless
+        wru.assert("something else to check", 1);
+    }
+}
+</code></pre>
+
+<p>In above example, the <code>onreadystatechange</code> function may be executed many times on different <code>readyState</code>. The <em>wru</em> logic cannot care less about it since an asynchronous callback is considered <em>done</em> when <strong>at least one assertion has been performed</strong>.
+If this does not happen the internal <code>TIMEOUT</code> constant, by default 10 seconds, will kill the procedure.
+You have to admit there is no reason to create an asynchronous test without performing some assertion inside the callback ... and this is where <em>wru</em> is smart.
+If many assertions have been defined and one of them is not reached is most likely because there was an error or a failure in the test.
+<em>wru</em> tracks all tests without problems so forget things such <code>lib.expectedAssertions(3)</code> and "*friends*" ... you really may not need that!</p>
+
+<h2>the temporary object</h2>
+
+<p>If needed, every <code>setup</code>, <code>test</code>, or <code>teardown</code> function will receive a "*freshly new backed*" object for the current test.
+This can be handy to store some reference or value on <code>setup</code>, use them during the <code>test</code>, and drop them during the <code>teardown</code> if necessary.</p>
+
+<pre><code>// the test object ...
+{
+    name: "tmp object all over",
+    setup: function (tmp) {
+        tmp.global = window;
+        tmp.global.random = Math.random();
+    },
+    test: function (tmp) {
+        wru.assert(
+            tmp.global === window // true
+        );
+        wru.assert(
+            typeof tmp.global.random == "number" // true again
+        );
+    },
+    teardown: function (tmp) {
+        delete tmp.global.random;
+        delete tmp.global;
+    }
+}
+</code></pre>
+
+<h1>the build process</h1>
+
+<p><em>wru</em> is based on <a href="http://code.google.com/p/javascript-builder/">javascript-builder</a> which is able to aggregate distributed files in order to produce the final library/framework even if the source/JS logic is split in more files.</p>
+
+<p>This is the <em>wru</em> case, where some file is dedicated for web environment rather than console/shell one.
+If you fork the project and you make some change/improvement, first of all let me know :-), secondly remember to re-build the script.
+This is the list of files actually created by <em>wru build process</em> inside the <em>build</em> folder:</p>
+
+<ul>
+<li>
+<strong>wru.console.max.js</strong> is the full script console/shell related, suitable for <em>node.js</em> or <em>rhino</em> tests</li>
+<li>
+<strong>wru.console.js</strong> is the minified version of the precedent one with <code>wru.debug()</code> stripped out</li>
+<li>
+<strong>wru.dom.js</strong> is the full script DOM related, suitable for <em>web</em> and <em>browsers</em>
+</li>
+<li>
+<strong>wru.min.js</strong> is the minified version of the precedent one with <code>wru.debug()</code> stripped out</li>
+</ul><p><code>wru.debug()</code> is a method used to export, track, test, or change internals. You should never use this method unless strictly necessary but it's there for debugging purpose.
+<code>wru.debug()</code> is automatically removed from built versions so that no evaluation of internals can be possible.</p>
+
+<p>If you want to have an overall view of the framework check already built output since if not familiar with this build process it may be hard at the beginning.</p>
+
+<p>This is the <a href="https://github.com/WebReflection/wru/blob/master/build/wru.dom.js">HTML version</a>, and this is the <a href="https://github.com/WebReflection/wru/blob/master/build/wru.console.max.js">console one</a>, you will notice things make sense there since the order is specified in the <a href="https://github.com/WebReflection/wru/blob/master/builder/build.py">build.py</a> file.</p>
+
+<p>Please remember all you have to do to build <em>wru</em> is this call in the <em>wru</em> project root</p>
+
+<pre><code>python builder/build.py
+</code></pre>
+
+<h1>wru against others</h1>
+
+<p>Other tests frameworks may offer more than what <em>wru</em> does but this rarely comes for free.
+Some of them may have such complicated/articulated logic that it may happens is the test framework itself that's failing rather than your code.
+Also you need to read a lot of documentation and most likely to obtain something already possible with <em>wru</em>.
+I am not saying <em>wru</em> is the best test framework out there, I am just saying you should consider your requirements before you chose a test framework ;-)
+In any case, <em>wru</em> aim is to make any sort of test simplified and under control.</p>
+
+<p>As example: "*do you really need so much 'magic' to perform these tasks?*"</p>
+
+<pre><code>// rather than specify expected arguments
+// via magic/complicated operations
+function (a, b, c) {
+    wru.assert("received numbers",
+        typeof a == "number"
+        &amp;&amp;
+        typeof b == "number"
+        &amp;&amp;
+        typeof c == "number"
+    );
+}
+
+// rather than specify returned values
+// via magic/complicated operations
+wru.assert(typeof callbac() != "undefined");
+
+// did you know the console object
+// may have already an assert() method
+// since that's basically all you need?
+wru.assert(
+    "if true, I can get rid of wru since all I need is 'assert'",
+    "assert" in console
+);
+
+// the only reason wru may be handy is the
+// cross platform/environment compatibility
+// and its async method interlaced with
+// current environment layout (HTML or shell/console/bash)
+wru.assert("oh come on but this is so easy!", 1);
+</code></pre>
+
+<p>Just give it a try ;-)</p>
+
+<h1>HTML VS console</h1>
+
+<p><em>wru</em> core functionality is exactly the same in both environments ... it cannot be easier to maintain, imo.
+However, there are few substantial differences between HTML results and those shown in the console</p>
+
+<h2>HTML tests</h2>
+
+<ul>
+<li>based on classes, easily to customize via <a href="https://github.com/WebReflection/wru/blob/master/test/wru.css">CSS</a>
+</li>
+<li>differential colors accordingly with test results: green if successful, red if failed, black if cryptical (e.g. unmanaged exceptions)</li>
+<li>failures or errors are not shown by default, <strong>one click</strong> to see the list of problems in any of those non green tests</li>
+<li>summary on top, no need to scroll 'till the end of the document to understand how it was. A nice summary with all passed, failed, or unmanaged errors test is shown on top</li>
+</ul><h2>console tests</h2>
+
+<ul>
+<li>based on <code>stdout</code>
+</li>
+<li>differential prefixes accordingly with test results: <code>[OK]</code> if successful, <code>[FAILURE]</code> if failed, <code>[ERROR]</code> if cryptical (e.g. unmanaged exceptions)</li>
+<li>failures and errors are always listed in the output</li>
+<li>summary always at the end of the test</li>
+</ul><h1>I need a setup per each test!</h1>
+
+<p>Sure you do :-)</p>
+
+<pre><code>// just create a simple wrapper before your tests
+// to fully automate the procedure
+wru.test = (function (test) {
+
+    // we got a closure here, do whaveter you want!
+    function whateverSetupIsNeeded(tmp) {
+        // do setup stuff
+    }
+
+    return function (testObjects) {
+        // be sure it's an array, convert otherwise
+        testObjects = [].conca(testObjects);
+
+        // per each object
+        for (var
+            // reassign the setup if present
+            reassign = function (setup) {
+                testObjects[i].setup = function (tmp) {
+                    whateverSetupIsNeeded(tmp);
+                    setup &amp;&amp; setup(tmp);
+                };
+            },
+            i = testObjects.length; i--;
+            reassign(testObjects[i].setup)
+        );
+
+        // invoke wru.test() which is self bound
+        test(list);
+
+        // that's pretty much it
+    };
+
+}(wru.test));
+</code></pre>
+
+<p>Similar technique if you need same teardown call per each test.</p>
+
+<h1>I need other edge cases too !</h1>
+
+<p>The cool part is that being simple, <em>wru</em> is also highly customizable.
+Please keep an eye in the <a href="https://github.com/WebReflection/wru/blob/master/test/solutions.html">solutions.html</a> file.
+I will try to update it as soon as some <em>request or edge case</em> comes up.</p>
+
+<h1>wrap it if you want</h1>
+
+<p>If you think <em>wru</em> is too simple, you still have a chance to improve it wrapping its basic methods and create something wonderful out of it.
+Arguments automations? Returned values? Expected number of calls per callback?</p>
+
+<p>The <em>wru</em> cross environment core is easy to hack for anybody, check <a href="https://github.com/WebReflection/wru/blob/master/src/wru.js">wru.js</a> and your are already half way through ;-)</p>
+
+<h1>license</h1>
+
+<p><em>wru</em> general purpose test framework and the rest of the project is under Mit Style License</p>
+
+<pre><code>Copyright (C) 2011 by Andrea Giammarchi, @WebReflection
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+</code></pre>
+
+<h2>OT: some fun during wru development</h2>
+
+<p>If you check the built source you will realize that a <code>wru.test()</code> lifecycle is between a call to internal <code>isGonnaBeLegen()</code> function, passing through the <code>waitForIt</code> variable if some asynchronous call has been required, and ending up into the <code>Dary()</code> callback.</p>
+
+<p>I know you don't care but at least now you know how is the <code>wru.test()</code> lifecycle :{D</p>
+        </section>
+
+        <aside id="sidebar">
+          <a href="https://github.com/WebReflection/wru/zipball/master" class="button">
+            <small>Download</small>
+            .zip file
+          </a>
+          <a href="https://github.com/WebReflection/wru/tarball/master" class="button">
+            <small>Download</small>
+            .tar.gz file
+          </a>
+
+          <p class="repo-owner"><a href="https://github.com/WebReflection/wru"></a> is maintained by <a href="https://github.com/WebReflection">WebReflection</a>.</p>
+
+          <p>This page was generated by <a href="pages.github.com">GitHub Pages</a> using the Architect theme by <a href="http://twitter.com/jasonlong">Jason Long</a>.</p>
+        </aside>
+      </div>
+    </div>
+
+  
+  </body>
+</html>
