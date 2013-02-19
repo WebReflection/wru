@@ -53,16 +53,20 @@
     }
 
     function showSummary() {
-        var status;
+        var code = 0, status;
         log(EMPTY);
         log(OUTPUT_SEPARATOR);
         switch (true) {
             case !!overallFatal:
+                code++;
                 status = "error";
                 log(ERROR + "   " + overallFatal + " Errors");
+                break;
             case !!overallFail:
+                code++;
                 status = "fail";
                 log(FAILURE + EMPTY + overallFail + " Failures");
+                break;
             default:
                 status = "pass";
                 log(OK + "      " + overallPass + " Passes");
@@ -73,7 +77,7 @@
         wru.after();
         try {
             // node.js
-            process.exit();
+            process.exit(code);
         } catch(up) {
             // rhino
             quit();
