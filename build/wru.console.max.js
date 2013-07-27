@@ -238,6 +238,7 @@ var wru = function (window) {"use strict";
 
     var // wru library core
         wru = {
+            timeout: TIMEOUT,
             assert: function assert(description, result) {
 
                 // if no description provided, variables are shifted
@@ -260,7 +261,7 @@ var wru = function (window) {"use strict";
                 return result;
             },
             async: function async(description, callback, timeout, p) {
-
+                var delay = timeout || wru.timeout;
                 // p is used as sentinel
                 // it defines the anonymous name
                 // if necessary and it's used to flag the timeout
@@ -273,6 +274,7 @@ var wru = function (window) {"use strict";
                 // wru.async(function () { ... }, timeout)
                 // wru.async("test description", function () { ... }, timeout)
                 if (typeof description == "function") {
+                    delay = callback || wru.timeout;
                     timeout = callback;
                     callback = description;
                     description = "asynchronous test #" + p;
@@ -293,7 +295,7 @@ var wru = function (window) {"use strict";
                     // timeout can be specified
                     // this procedure ensure that it's
                     // a number and it's greater than 0
-                    abs(timeout || TIMEOUT) || TIMEOUT
+                    abs(delay || TIMEOUT)
                 );
 
                 // the async function is a wrap of the passed callback
