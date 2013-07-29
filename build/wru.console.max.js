@@ -261,7 +261,7 @@ var wru = function (window) {"use strict";
                 return result;
             },
             async: function async(description, callback, timeout, p) {
-                var delay = timeout || wru.timeout;
+                var delay = timeout || wru.timeout || (wru.timeout = TIMEOUT);
                 // p is used as sentinel
                 // it defines the anonymous name
                 // if necessary and it's used to flag the timeout
@@ -275,7 +275,6 @@ var wru = function (window) {"use strict";
                 // wru.async("test description", function () { ... }, timeout)
                 if (typeof description == "function") {
                     delay = callback || wru.timeout;
-                    timeout = callback;
                     callback = description;
                     description = "asynchronous test #" + p;
                 }
@@ -295,7 +294,7 @@ var wru = function (window) {"use strict";
                     // timeout can be specified
                     // this procedure ensure that it's
                     // a number and it's greater than 0
-                    abs(delay || TIMEOUT)
+                    abs(delay) || wru.timeout
                 );
 
                 // the async function is a wrap of the passed callback
@@ -443,6 +442,14 @@ var wru = function (window) {"use strict";
         Object.defineProperty(window, "status", {get: function () {
           return wru.status;
         }});
+        Object.defineProperty(window, "timeout", {
+          get: function () {
+            return wru.timeout;
+          },
+          set: function (value) {
+            wru.timeout = parseInt(value, 10) || wru.timeout;
+          }
+        });
 
         // re-assign window to make it global
         window = global;

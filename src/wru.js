@@ -24,7 +24,7 @@
                 return result;
             },
             async: function async(description, callback, timeout, p) {
-                var delay = timeout || wru.timeout;
+                var delay = timeout || wru.timeout || (wru.timeout = TIMEOUT);
                 // p is used as sentinel
                 // it defines the anonymous name
                 // if necessary and it's used to flag the timeout
@@ -38,7 +38,6 @@
                 // wru.async("test description", function () { ... }, timeout)
                 if (typeof description == "function") {
                     delay = callback || wru.timeout;
-                    timeout = callback;
                     callback = description;
                     description = "asynchronous test #" + p;
                 }
@@ -58,7 +57,7 @@
                     // timeout can be specified
                     // this procedure ensure that it's
                     // a number and it's greater than 0
-                    abs(delay || TIMEOUT)
+                    abs(delay) || wru.timeout
                 );
 
                 // the async function is a wrap of the passed callback
