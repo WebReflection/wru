@@ -124,27 +124,32 @@ var wru = function (window) {"use strict";
     function log(info, avoidNewLine) {
         info = info + (avoidNewLine ? "" : "\n");
         try {
-            // node 0.6
-            require("util").print(info);
+          // node 0.11+ alternative ...
+          process.stdout.write(info);
         } catch(up) {
-            try {
-                // node 0.4
-                require("sys").print(info);
-            } catch(up) {
-                try {
-                    // hello Rhino
-                    // print uses println ... while we need print without \n
-                    java.lang.System.out.print(info);
-                } catch(up) {
-                    try {
-                        // phantomjs or default fallback
-                        console.log(info);
-                    } catch(up) {
-                        // jsc and others
-                        print(info);
-                    }
-                }
-            }
+          try {
+              // node 0.6
+              require("util").print(info);
+          } catch(up) {
+              try {
+                  // node 0.4
+                  require("sys").print(info);
+              } catch(up) {
+                  try {
+                      // hello Rhino
+                      // print uses println ... while we need print without \n
+                      java.lang.System.out.print(info);
+                  } catch(up) {
+                      try {
+                          // phantomjs or default fallback
+                          console.log(info);
+                      } catch(up) {
+                          // jsc and others
+                          print(info);
+                      }
+                  }
+              }
+          }
         }
     }
 
