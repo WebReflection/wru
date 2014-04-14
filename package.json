@@ -1,6 +1,6 @@
 {
     "name": "wru"
-  , "version": "0.2.5"
+  , "version": "0.2.6"
   , "description": "sync and async JavaScript tests have never been that easy"
   , "homepage": "https://github.com/WebReflection/wru"
   , "keywords": ["test", "general", "purpose", "async", "sync", "asynchronous", "phantom", "rhino", "browser"]
