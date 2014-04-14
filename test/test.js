@@ -10,6 +10,7 @@
               this.wru :
               require("./../build/wru.console")
             ;
+            go(wru);
         } catch(wru) {
             // rhino
             try {
@@ -17,6 +18,7 @@
                     new java.io.File(".").getCanonicalPath() +
                     "/build/wru.console.js"
                 );
+                go(wru);
             } catch(wru) {
                 try {
                     // jsc test/test.js
@@ -24,16 +26,32 @@
                         "build/wru.console.js"
                     );
                     jsc = true;
+                    go(wru);
                 } catch(wru) {
                     // html (assuming test.html is used in same folders structure)
                     (function(xhr){
-                        xhr.open("get", "./../build/wru.min.js", false);
+                        try {
+                        xhr.open("get", "./../build/wru.min.js", true);
+                        xhr.onreadystatechange = function () {
+                          if (xhr.readyState == 4) {
+                            try {
+                              Function(xhr.responseText.replace(/var wru=/,"this.wru=")).call(window);
+                            } catch(e) {
+                              alert(e);
+                            }
+                            go(window.wru);
+                          }
+                        };
                         xhr.send(null);
-                        Function(xhr.responseText.replace(/var wru=/,"this.wru=")).call(window);
+                        } catch(e) {
+                          alert(e.message || e);
+                        }
                     }(new XMLHttpRequest));
                 }
             }
         }
+
+        function go(wru) {
 
         wru.test([{
             name: "test that should pass",
@@ -81,3 +99,4 @@
                 wru.assert(executed);
             }
         }]);
+      }
