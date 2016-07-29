@@ -266,7 +266,7 @@ var wru = function (window) {"use strict";
                 return result;
             },
             async: function async(description, callback, timeout, p) {
-                var delay = timeout || wru.timeout || (wru.timeout = TIMEOUT);
+                var r, delay = timeout || wru.timeout || (wru.timeout = TIMEOUT);
                 // p is used as sentinel
                 // it defines the anonymous name
                 // if necessary and it's used to flag the timeout
@@ -331,7 +331,7 @@ var wru = function (window) {"use strict";
 
                     // the original callback is called with proper *this* if specified
                     try {
-                        callback.apply(this, arguments);
+                        r = callback.apply(this, arguments);
                     } catch(doooodeThisIsBAD) {
                         // if there is an Error
                         // the test is screwed up
@@ -354,6 +354,9 @@ var wru = function (window) {"use strict";
                         // if there is no reason to waitForIt then is time to call Dary()
                         --waitForIt || (daryTimeout = setTimeout(Dary, 0));
                     }
+
+                    // return the eventual callback value
+                    return r;
                 };
             },
 
